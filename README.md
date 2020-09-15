@@ -10,7 +10,7 @@ Next type in the following commands to install TinyTeX:
 choco install tinytex
 ```
 
-This will install **TinyTeX ** and make the TeX Live package manager, `tlmgr` available on path.
+This will install TinyTeX and make the TeX Live package manager, `tlmgr` available on PATH.
 
 To uninstall TinyTeX, use the command:
 
