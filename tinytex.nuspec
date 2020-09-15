@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>tinytex</id>
+    <version>0.0</version>
+    <packageSourceUrl>https://github.com/yihui/chocolatey-tinytex/tree/master/</packageSourceUrl>
+    <owners>naveen521kk</owners>
+    <title>TinyTeX</title>
+    <authors>Naveen M K, Yihui Xie, TeX Live Developers</authors>
+    <projectUrl>https://yihui.org/tinytex/</projectUrl>
+    <iconUrl>https://yihui.org/images/logo-tinytex.png</iconUrl>
+    <copyright>Copyright 2020 TeX Live Developers</copyright>
+    <licenseUrl>https://tug.org/texlive/LICENSE.TL</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/yihui/tinytex/</projectSourceUrl>
+    <docsUrl>https://yihui.org/tinytex/</docsUrl>
+    <bugTrackerUrl>https://github.com/yihui/chocolatey-tinytex/issues</bugTrackerUrl>
+    <tags>tinytex tex LaTeX TeXLive tiny</tags>
+    <summary>A lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live </summary>
+    <description>
+# TinyTeX
+
+TinyTeX is a custom LaTeX distribution based on TeX Live that is relatively small in size, but functions well in most cases, especially for R users. If you run into the problem of missing LaTeX packages, it should be super clear to you what you need to do (in fact, R users won’t need to do anything). You only install LaTeX packages you actually need.
+
+Please see the full documentation at https://yihui.org/tinytex/.
+	</description>
+    <releaseNotes>https://github.com/yihui/chocolatey-tinytex/releases</releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
