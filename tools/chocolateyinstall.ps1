@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop';
 $toolsDir=Get-ToolsLocation
-$url        = "https://github.com/yihui/chocolatey-tinytex/releases/download/v$($env:ChocolateyPackageVersion)/TinyTeX-1.zip"
+$url        = "https://github.com/yihui/tinytex-windows/releases/download/v$($env:ChocolateyPackageVersion)/TinyTeX-1.zip"
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir
