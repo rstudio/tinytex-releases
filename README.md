@@ -6,7 +6,7 @@ TinyTeX is a lightweight, cross-platform, portable, and easy-to-maintain LaTeX d
 
 ## Windows binaries
 
-The Windows binaries of TinyTeX are published (monthly) to the Github Releases of this repository: https://github.com/yihui/tinytex-windows/releases Each release contains three versions of TinyTeX:
+The Windows binaries of TinyTeX are published (monthly) to the Github Releases of this repository: https://github.com/yihui/tinytex-releases/releases Each release contains three versions of TinyTeX:
 
 - `TinyTeX-0.zip` contains the `infraonly` scheme of TeX Live, without any LaTeX packages.
 
@@ -16,7 +16,7 @@ The Windows binaries of TinyTeX are published (monthly) to the Github Releases o
 
 ## Chocolatey package
 
-You may install TinyTeX as a Chocolatey package. First, you would need to install the [Chocolatey Package Manager](https://chocolatey.org/install) if not already. Next type in the following command to install TinyTeX:
+You may install TinyTeX as [a Chocolatey package](https://chocolatey.org/packages/tinytex). First, you would need to install the [Chocolatey Package Manager](https://chocolatey.org/install) if it has not already been installed. Next type in the following command to install TinyTeX:
 
 ```powershell
 choco install tinytex
