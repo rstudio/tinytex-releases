@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>tinytex</id>
-    <version>0.0</version>
+    <version>0.2</version>
     <packageSourceUrl>https://github.com/yihui/chocolatey-tinytex/tree/master/</packageSourceUrl>
     <owners>naveen521kk</owners>
     <title>TinyTeX</title>
