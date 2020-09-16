@@ -1,7 +1,11 @@
 image: Ubuntu
 
 install:
-  - "[ ! -z ${GH_TOKEN} ] || exit 0"
+  - "[ ! -z ${GH_KEY} ] || exit 0"
+  - eval "$(ssh-agent -s)"
+  - echo ${GH_KEY} | base64 -d > ~/id_rsa
+  - chmod 0600 ~/id_rsa
+  - ssh-add ~/id_rsa
   - export CURRENT_TAG=$(date "+%Y.%m")
   - git checkout master
   - git tag v${CURRENT_TAG} || exit 0  # if unable to apply the tag, the tag must exist, so exit
@@ -19,9 +23,9 @@ install:
   - git config user.email "xie@yihui.name"
   - git config user.name "Yihui Xie"
   - git add -u
-  - git commit -m"TinyTeX release v${CURRENT_TAG}"
+  - git diff-index --quiet HEAD || git commit -m"TinyTeX release v${CURRENT_TAG}"
   - git tag -f v${CURRENT_TAG}  # actually tag this commit
-  - git push -q --tags https://${GH_TOKEN}@github.com/${APPVEYOR_REPO_NAME}.git master
+  - git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git master
 
 build: off
 
