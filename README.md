@@ -32,6 +32,57 @@ To uninstall TinyTeX, use the command:
 choco uninstall tinytex
 ```
 
-## Scoop package
+## Scoop packages
 
-Coming...
+Scoop is another package manager for Windows. You need to install [_scoop_](https://scoop-docs.now.sh/docs/getting-started/Quick-Start.html) first to use it from powershell.
+
+Apps for _scoop_ are available through "buckets". For now, TinyTex binary packages are not available in the default **main** or **extras** buckets that comes with a new installation of _scoop_, but through the scoop bucket **r-bucket** at https://github.com/cderv/r-bucket/ with other R-related tools.
+
+You need first to add this bucket
+```powershell 
+scoop bucket add r-bucket https://github.com/cderv/r-bucket.git
+```
+
+Then you can install **one of** the binaries: 
+
+* Recommanded installation of `TinyTeX.zip`
+```powershell
+scoop install TinyTex
+```
+
+* Minimal installation (infra-only) of `TinyTeX-0.zip`
+```powershell
+scoop install TinyTex-min
+```
+
+* Full installation (more packages) of `TinyTeX-1.zip`
+```powershell
+scoop install TinyTex-min
+```
+
+This will install TinyTeX and make the TeX Live package manager, `tlmgr` available on PATH.
+
+Only one of this installation can work at the same time, so you won't be able to install one on an other. This will fail gracefully:
+
+```powershell
+❯ scoop install TinyTex-min
+Installing 'TinyTex-min' (2020.09) [64bit]
+Starting download ...
+Download: (OK):download completed.
+Checking hash of TinyTeX-0.zip ... ok.
+Extracting TinyTeX-0.zip ... done.
+Running pre-install script...
+--> Another TinyTex already found. Cancelling current installation...
+Uninstalling 'TinyTex-min' (2020.09).
+'TinyTex-min' was uninstalled.
+Exception: You already have Tinytex installed. Run scoop uninstall Tinytex if you want to use TinyTex-min.
+```
+
+To uninstall :
+```powershell
+scoop uninstall TinyTex
+# or 
+scoop uninstall TinyTex-min
+# or 
+scoop uninstall TinyTex-full
+```
