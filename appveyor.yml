@@ -76,5 +76,5 @@ for:
           choco uninstall -y tinytex
         } else {
           choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
-          choco push tinytex.*.nupkg --source https://push.chocolatey.org/
+          choco push --source https://push.chocolatey.org/
         }
