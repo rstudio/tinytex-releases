@@ -11,6 +11,8 @@ artifacts:
     name: macOS binaries
   - path: TinyTeX*.zip
     name: Windows binaries
+  - path: choco.zip
+    name: Chocolatey log
 
 deploy:
   provider: GitHub
@@ -74,6 +76,7 @@ for:
         if ($Env:APPVEYOR_REPO_TAG -eq "false") {
           choco install --no-progress tinytex -source "'.;https://chocolatey.org/api/v2/'"
           choco uninstall -y tinytex
+          7z a ../choco.zip C:\ProgramData\chocolatey\logs\chocolatey.log
         } else {
           choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
           choco push --source https://push.chocolatey.org/
