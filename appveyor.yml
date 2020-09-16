@@ -70,5 +70,11 @@ for:
   install:
     - cd choco
     - choco pack
-    - choco install --no-progress tinytex -source "'.;https://chocolatey.org/api/v2/'"
-    - choco uninstall -y tinytex
+    - ps: |
+        if ($Env:APPVEYOR_REPO_TAG -eq "false") {
+          choco install --no-progress tinytex -source "'.;https://chocolatey.org/api/v2/'"
+          choco uninstall -y tinytex
+        } else {
+          choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
+          choco push tinytex.*.nupkg --source https://push.chocolatey.org/
+        }
