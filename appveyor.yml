@@ -2,13 +2,13 @@ image: Ubuntu
 
 install:
   - "[ ! -z ${GH_KEY} ] || exit 0"
+  - export CURRENT_TAG=$(date "+%Y.%m")
+  - git checkout master
+  - git tag v${CURRENT_TAG} || exit 0  # if unable to apply the tag, the tag must exist, so exit
   - eval "$(ssh-agent -s)"
   - echo ${GH_KEY} | base64 -d > ~/id_rsa
   - chmod 0600 ~/id_rsa
   - ssh-add ~/id_rsa
-  - export CURRENT_TAG=$(date "+%Y.%m")
-  - git checkout master
-  - git tag v${CURRENT_TAG} || exit 0  # if unable to apply the tag, the tag must exist, so exit
   - export TINYTEX_RELEASE=true
   - |
     for EXT in zip tgz tar.gz
