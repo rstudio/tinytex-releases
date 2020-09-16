@@ -1,5 +1,6 @@
 image:
   - Ubuntu
+  - Visual Studio 2019
 
 build: off
 
@@ -60,3 +61,14 @@ for:
     - git diff-index --quiet HEAD || git commit -m"TinyTeX release v${CURRENT_TAG}"
     - git tag -f v${CURRENT_TAG}  # actually tag this commit
     - git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git master
+
+-
+  matrix:
+    only:
+      - image: Visual Studio 2019
+
+  install:
+    - cd choco
+    - choco pack
+    - choco install --no-progress tinytex -source "'.;https://chocolatey.org/api/v2/'"
+    - choco uninstall -y tinytex
