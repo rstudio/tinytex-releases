@@ -4,7 +4,7 @@
   <metadata>
     <id>tinytex</id>
     <version>2020.09</version>
-    <packageSourceUrl>https://github.com/yihui/tinytex-releases/tree/master/</packageSourceUrl>
+    <packageSourceUrl>https://github.com/yihui/tinytex-releases/tree/master/choco</packageSourceUrl>
     <owners>naveen521kk</owners>
     <title>TinyTeX</title>
     <authors>Naveen M K, Yihui Xie, TeX Live Developers</authors>
