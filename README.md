@@ -32,7 +32,7 @@ To uninstall TinyTeX, use the command:
 choco uninstall tinytex
 ```
 
-## Scoop packages
+## Scoop package
 
 Scoop is another package manager for Windows. You need to install [_scoop_](https://scoop-docs.now.sh/docs/getting-started/Quick-Start.html) first to use it from powershell.
 
