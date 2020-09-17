@@ -43,46 +43,18 @@ You need first to add this bucket
 scoop bucket add r-bucket https://github.com/cderv/r-bucket.git
 ```
 
-Then you can install **one of** the binaries: 
+Then type the following command to install TinyTeX: 
 
-* Recommanded installation of `TinyTeX.zip`
 ```powershell
-scoop install TinyTeX
-```
-
-* Minimal installation (infra-only) of `TinyTeX-0.zip`
-```powershell
-scoop install TinyTeX-min
-```
-
-* Full installation (more packages) of `TinyTeX-1.zip`
-```powershell
-scoop install TinyTeX-min
+scoop install tinytex
 ```
 
 This will install TinyTeX and make the TeX Live package manager, `tlmgr` available on PATH.
 
-Only one of this installation can work at the same time, so you won't be able to install one on an other. This will fail gracefully:
+To uninstall TinyTeX, use the command:
 
 ```powershell
-❯ scoop install TinyTeX-min
-Installing 'TinyTeX-min' (2020.09) [64bit]
-Starting download ...
-Download: (OK):download completed.
-Checking hash of TinyTeX-0.zip ... ok.
-Extracting TinyTeX-0.zip ... done.
-Running pre-install script...
---> Another TinyTeX already found. Cancelling current installation...
-Uninstalling 'TinyTeX-min' (2020.09).
-'TinyTeX-min' was uninstalled.
-Exception: You already have Tinytex installed. Run scoop uninstall Tinytex if you want to use TinyTeX-min.
+scoop uninstall tinytex
 ```
 
-To uninstall :
-```powershell
-scoop uninstall TinyTeX
-# or 
-scoop uninstall TinyTeX-min
-# or 
-scoop uninstall TinyTeX-full
-```
+For more information on this scoop package, please see https://github.com/cderv/r-bucket/.
