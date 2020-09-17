@@ -34,4 +34,27 @@ choco uninstall tinytex
 
 ## Scoop package
 
-Coming...
+Scoop is another package manager for Windows. You need to install [_scoop_](https://scoop-docs.now.sh/docs/getting-started/Quick-Start.html) first to use it from powershell.
+
+Apps for _scoop_ are available through "buckets". For now, TinyTeX binary packages are not available in the default **main** or **extras** buckets that comes with a new installation of _scoop_, but through the scoop bucket **r-bucket** at https://github.com/cderv/r-bucket/ with other R-related tools.
+
+You need first to add this bucket
+```powershell 
+scoop bucket add r-bucket https://github.com/cderv/r-bucket.git
+```
+
+Then type the following command to install TinyTeX: 
+
+```powershell
+scoop install tinytex
+```
+
+This will install TinyTeX and make the TeX Live package manager, `tlmgr` available on PATH.
+
+To uninstall TinyTeX, use the command:
+
+```powershell
+scoop uninstall tinytex
+```
+
+For more information on this scoop package, please see https://github.com/cderv/r-bucket/.
