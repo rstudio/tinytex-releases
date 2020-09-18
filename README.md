@@ -1,5 +1,7 @@
 # TinyTeX releases for Windows, macOS, and Linux
 
+[![Build status](https://ci.appveyor.com/api/projects/status/2ortb2mqkm2fjg4k/branch/master?svg=true)](https://ci.appveyor.com/project/yihui/tinytex-releases/branch/master)
+
 <a href="https://yihui.org/tinytex/"><img src="https://yihui.org/images/logo-tinytex.png" alt="tinytex logo" align="right" width="200px" /></a>
 
 TinyTeX is a lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live. You may see the Github repo (https://github.com/yihui/tinytex) and project homepage (https://yihui.org/tinytex/) for more info.
