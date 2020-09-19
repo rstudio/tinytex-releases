@@ -20,6 +20,3 @@ foreach ($file in $files) {
   #We are directly adding it to path so no need to generate shims
   New-Item "$file.ignore" -type file -force | Out-Null
 }
-
-#create a shim for tlmgr.bat https://chocolatey.org/docs/helpers-install-bin-file
-Install-BinFile -Name tlmgr -Path "$toolsDir\TinyTeX\bin\win32\tlmgr.bat"
