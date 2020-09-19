@@ -75,7 +75,9 @@ for:
     - ps: |
         if ($Env:APPVEYOR_REPO_TAG -eq "false") {
           choco install --no-progress tinytex -source "'.;https://chocolatey.org/api/v2/'"
+          echo $Env:PATH
           refreshenv
+          echo $Env:PATH
           where tlmgr
           tlmgr --version
           pdflatex --version
