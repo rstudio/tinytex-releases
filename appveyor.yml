@@ -39,7 +39,7 @@ for:
 
   install:
     - "[ ! -z ${GH_KEY} ] || exit 0"
-    - export CURRENT_TAG=$(date "+%Y.%m")
+    - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
     - git checkout master
     - git tag v${CURRENT_TAG} || exit 0  # if unable to apply the tag, the tag must exist, so exit
     - eval "$(ssh-agent -s)"
