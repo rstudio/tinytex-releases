@@ -52,11 +52,11 @@ for:
       do
         for BASE in '' -0 -1
         do
-          wget https://yihui.org/tinytex/TinyTeX${BASE}.${EXT}
+          wget -O TinyTeX${BASE}-v${CURRENT_TAG}.${EXT} https://yihui.org/tinytex/TinyTeX${BASE}.${EXT}
         done
       done
     - sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
-    - sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
+    - sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
     - git config user.email "xie@yihui.name"
     - git config user.name "Yihui Xie"
     - git add -u
