@@ -75,6 +75,8 @@ for:
     - ps: |
         if ($Env:APPVEYOR_REPO_TAG -eq "false") {
           choco install --no-progress tinytex -source "'.;https://chocolatey.org/api/v2/'"
+          where tlmgr
+          tlmgr --version
           choco uninstall -y tinytex
           7z a ../choco.zip C:\ProgramData\chocolatey\logs\chocolatey.log
         } else {
