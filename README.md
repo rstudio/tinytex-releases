@@ -12,11 +12,13 @@ The binary packages of TinyTeX are published (monthly) to the Github Releases of
 
 - `TinyTeX-0.*` contains the `infraonly` scheme of TeX Live, without any LaTeX packages.
 
-- `TinyTeX-1.*` contains [about 60 LaTeX packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-custom.txt) enough to compile common R Markdown documents (which was the original motivation of the TinyTeX project).
+- `TinyTeX-1.*` contains [about 90 LaTeX packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-custom.txt) enough to compile common R Markdown documents (which was the original motivation of the TinyTeX project).
 
 - `TinyTeX.*` contains [more LaTeX packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-yihui.txt) requested by the community.
 
 The `zip` packages are for Windows. The `tgz` packages are for macOS. The `tar.gz` packages are for Linux.
+
+For those who are curious about how these packages are built, please read [the FAQ 3 of TinyTeX](https://yihui.org/tinytex/faq/).
 
 ## Chocolatey package
 
