@@ -57,7 +57,7 @@ for:
           wget -O TinyTeX${BASE}-v${CURRENT_TAG}.${EXT} https://yihui.org/tinytex/TinyTeX${BASE}.${EXT}
         done
       done
-      wget -O installer-unix-v${CURRENT_TAG}.tar.gz https://yihui.org/tinytex/installer-unix.targ.gz
+      wget -O installer-unix-v${CURRENT_TAG}.tar.gz https://yihui.org/tinytex/installer-unix.tar.gz
     - sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
     - sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
     - git config user.email "xie@yihui.name"
