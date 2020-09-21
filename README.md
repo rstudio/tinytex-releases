@@ -8,7 +8,7 @@ TinyTeX is a lightweight, cross-platform, portable, and easy-to-maintain LaTeX d
 
 ## Releases
 
-The binary packages of TinyTeX are published (monthly) to the Github Releases of this repository: https://github.com/yihui/tinytex-releases/releases Each release contains three variations:
+The binary packages of TinyTeX are published (usually monthly) to the Github Releases of this repository: https://github.com/yihui/tinytex-releases/releases Each release contains three variations:
 
 - `TinyTeX-0.*` contains the `infraonly` scheme of TeX Live, without any LaTeX packages. If you install this variation, you may install any other packages via `tlmgr` (which is a utility included in this variation), e.g., `tlmgr install latex-bin framed`.
 
@@ -16,7 +16,7 @@ The binary packages of TinyTeX are published (monthly) to the Github Releases of
 
 - `TinyTeX.*` contains [more LaTeX packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-yihui.txt) requested by the community.
 
-The `zip` packages are for Windows. The `tgz` packages are for macOS. The `tar.gz` packages are for Linux.
+The `zip` packages are for Windows. The `tgz` packages are for macOS. The `tar.gz` packages are for Linux. If you prefer using the daily build instead of monthly releases, you may also download them from URLs of the form `https://yihui.org/tinytex/VARIATION.EXT`, where `VARIATION` can be `TinyTeX-0`, `TinyTeX-1`, or `TinyTeX`, and `EXT` can be `zip`, `tgz`, or `tar.gz`, e.g., <https://yihui.org/tinytex/TinyTeX.zip>.
 
 For those who are curious about how these packages are built, please read [the FAQ 3 of TinyTeX](https://yihui.org/tinytex/faq/).
 
