@@ -62,3 +62,11 @@ scoop uninstall tinytex
 ```
 
 For more information on this scoop package, please see https://github.com/cderv/r-bucket/.
+
+## License
+
+All code in this repository and TinyTeX are licensed under GPL-2. Per [copying conditions of TeX Live](https://tug.org/texlive/LICENSE.TL), we (TinyTeX authors) want to clarify that:
+
+- We did not make changes to the TeX Live distribution, but basically packaged up a subset of its packages and redistributed them as TinyTeX.
+
+- We do not claim copyright on TinyTeX. Again, TinyTeX is a subset of TeX Live (https://tug.org/texlive/), and TeX Live is developed as a joint effort by [all TeX user groups](https://tug.org/usergroups.html).
