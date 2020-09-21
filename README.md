@@ -8,9 +8,9 @@ TinyTeX is a lightweight, cross-platform, portable, and easy-to-maintain LaTeX d
 
 ## Releases
 
-The binary packages of TinyTeX are published (monthly) to the Github Releases of this repository: https://github.com/yihui/tinytex-releases/releases Each release contains three versions of TinyTeX:
+The binary packages of TinyTeX are published (monthly) to the Github Releases of this repository: https://github.com/yihui/tinytex-releases/releases Each release contains three variations:
 
-- `TinyTeX-0.*` contains the `infraonly` scheme of TeX Live, without any LaTeX packages.
+- `TinyTeX-0.*` contains the `infraonly` scheme of TeX Live, without any LaTeX packages. If you install this variation, you may install any other packages via `tlmgr` (which is a utility included in this variation), e.g., `tlmgr install latex-bin framed`.
 
 - `TinyTeX-1.*` contains [about 90 LaTeX packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-custom.txt) enough to compile common R Markdown documents (which was the original motivation of the TinyTeX project).
 
@@ -20,7 +20,30 @@ The `zip` packages are for Windows. The `tgz` packages are for macOS. The `tar.g
 
 For those who are curious about how these packages are built, please read [the FAQ 3 of TinyTeX](https://yihui.org/tinytex/faq/).
 
-## Chocolatey package
+## Installation
+
+### R
+
+You may use the R package [**tinytex**](https://github.com/yihui/tinytex) to install TinyTeX. By default, [the function `tinytex::install_tinytex()`](https://yihui.org/tinytex/#for-r-users) installs the latest daily build of TinyTeX. If you want to install a specific version in this repo, you may use the `version` argument, e.g.,
+
+```r
+tinytex::install_tinytex(version = "2020.10")
+```
+
+Note that `install_tinytex()` installs the variation `TinyTeX-1.*`. If you want to install `TinyTeX.*` or `TinyTeX-0.*`, you need to use the function `install_prebuilt()`, e.g.,
+
+```r
+tinytex:::install_prebuilt('TinyTeX')
+# Or tinytex:::install_prebuilt('TinyTeX-0')
+# You can also specify the version, e.g,
+# tinytex:::install_prebuilt('TinyTeX', version = '2020.10')
+```
+
+## Shell/Batch scripts
+
+Please see https://yihui.org/tinytex/#installation for how to install TinyTeX via a Unix Shell or Windows Batch script. They also install the latest daily build by default, and you may specify the TinyTeX version via an environment variable `TINYTEX_VERSION` before running the installation script, e.g., `TINYTEX_VERSION=2020.10`. You may also specify other variations of TinyTeX via the environment variable `TINYTEX_INSTALLER`, e.g., `TINYTEX_INSTALLER=TinyTeX` (the default is `TinyTeX-1`).
+
+### Chocolatey
 
 You may install TinyTeX as [a Chocolatey package](https://chocolatey.org/packages/tinytex). First, you would need to install the [Chocolatey Package Manager](https://chocolatey.org/install) if it has not already been installed. Next type in the following command to install TinyTeX:
 
@@ -36,7 +59,7 @@ To uninstall TinyTeX, use the command:
 choco uninstall tinytex
 ```
 
-## Scoop package
+### Scoop
 
 Scoop is another package manager for Windows. You need to install [_scoop_](https://scoop-docs.now.sh/docs/getting-started/Quick-Start.html) first to use it from powershell.
 
