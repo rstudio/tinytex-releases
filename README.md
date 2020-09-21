@@ -93,3 +93,5 @@ All code in this repository and TinyTeX are licensed under GPL-2. Per [copying c
 - We did not make changes to the TeX Live distribution, but basically packaged up a subset of its packages and redistributed them as TinyTeX.
 
 - We do not claim copyright on TinyTeX. Again, TinyTeX is a subset of TeX Live (https://tug.org/texlive/), and TeX Live is developed as a joint effort by [all TeX user groups](https://tug.org/usergroups.html).
+
+Note that TinyTeX does not bundle the source code of LaTeX packages (to keep the size small). If you do want to obtain the source, you may find them [on CTAN](https://ctan.org). Alternatively, you can reinstall a package with the command `tlmgr installl --reinstall --with-src <PKG>` to obtain the source.
