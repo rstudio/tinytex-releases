@@ -22,6 +22,8 @@ For those who are curious about how these packages are built, please read [the F
 
 ## Installation
 
+TinyTeX can be installed in a variety of ways. You may use R, shell/batch scripts, Chocolatey, or Scoop to install it.
+
 ### R
 
 You may use the R package [**tinytex**](https://github.com/yihui/tinytex) to install TinyTeX. By default, [the function `tinytex::install_tinytex()`](https://yihui.org/tinytex/#for-r-users) installs the latest daily build of TinyTeX. If you want to install a specific version in this repo, you may use the `version` argument, e.g.,
@@ -39,7 +41,7 @@ tinytex:::install_prebuilt('TinyTeX')
 # tinytex:::install_prebuilt('TinyTeX', version = '2020.10')
 ```
 
-## Shell/Batch scripts
+### Shell/Batch scripts
 
 Please see https://yihui.org/tinytex/#installation for how to install TinyTeX via a Unix Shell or Windows Batch script. They also install the latest daily build by default, and you may specify the TinyTeX version via an environment variable `TINYTEX_VERSION` before running the installation script, e.g., `TINYTEX_VERSION=2020.10`. You may also specify other variations of TinyTeX via the environment variable `TINYTEX_INSTALLER`, e.g., `TINYTEX_INSTALLER=TinyTeX` (the default is `TinyTeX-1`).
 
