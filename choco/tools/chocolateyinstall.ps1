@@ -15,6 +15,10 @@ Install-ChocolateyZipPackage @packageArgs
 $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path add`""
 Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
 
+#updates tlmgr
+$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat update --self`""
+Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
+
 $files = get-childitem $toolsDir -include *.exe -recurse
 foreach ($file in $files) {
   #We are directly adding it to path so no need to generate shims
