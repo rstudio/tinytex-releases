@@ -39,6 +39,10 @@ for:
     only:
       - image: Ubuntu
 
+  branches:
+    only:
+      - master
+
   install:
     - "[ ! -z ${GH_KEY} ] || exit 0"
     - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
