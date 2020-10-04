@@ -1,1 +1,5 @@
 *.nupkg
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
