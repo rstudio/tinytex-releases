@@ -5,7 +5,7 @@ $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir
   url           = $url
-  checksum      = 'cb12c2b8c7904568a86d45f2b7f6aff6'
+  checksum      = '6baaf08175e5dc8f845edc259796b63f'
   checksumType  = 'md5'
 }
 
