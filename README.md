@@ -47,7 +47,7 @@ monthly releases, you may also download them from URLs of the form
 | tinytex binary (experimental) | [tinytex.exe](https://yihui.org/tinytex/bin/windows/tinytex.exe) | [tinytex](https://yihui.org/tinytex/bin/macos/tinytex)            | [tinytex](https://yihui.org/tinytex/bin/linux/tinytex)                  |
 
 For those who are curious about how these packages are built, please read [the
-FAQ 3 of TinyTeX](https://yihui.org/tinytex/faq/).
+FAQ 4 of TinyTeX](https://yihui.org/tinytex/faq/).
 
 ## Installation
 
