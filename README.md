@@ -63,7 +63,7 @@ the latest daily build of TinyTeX. If you want to install a specific version in
 this repo, you may use the `version` argument, e.g.,
 
 ``` r
-tinytex::install_tinytex(version = "v2020.10")
+tinytex::install_tinytex(version = "2020.10")
 # use version = "latest" if you want to install the latest release
 ```
 
