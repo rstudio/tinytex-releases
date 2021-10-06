@@ -32,8 +32,8 @@ foreach ($file in $files) {
 
 
 Write-Host "Installing Extra Packages"
-if (Test-Path "$toolsDir\tinytex-pkg-installed-$(Get-Date -Format ddMMyyHH).txt") {
-    $tinytex_tmp_file = "$toolsDir\tinytex-pkg-installed-$(Get-Date -Format ddMMyyHH).txt"
+$tinytex_tmp_file = "$toolsDir\tinytex-pkg-installed.txt"
+if (Test-Path "$tinytex_tmp_file") {
     $env:PATH = "$toolsDir\TinyTeX\bin\win32;$env:PATH"
     $tinytex_pkg_installed = (tlmgr info --list --only-installed --data name)
     $tinytex_reinstall = "$env:TMP\installed_old_packages.ps1"
