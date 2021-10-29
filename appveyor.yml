@@ -56,9 +56,13 @@ for:
     - "[ ${APPVEYOR_REPO_BRANCH} != master ] && exit 0 || true"
     - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
     - git checkout master
-    # if unable to apply the tag, the tag must exist, so download and exit
-    - git tag v${CURRENT_TAG} || (unset CURRENT_TAG && ./download.sh && exit 0)
+    # if the tag must exist, download and exit (deploy the daily build)
+    - |
+      if [ $(git tag -l "v${CURRENT_TAG}") ]; then
+        CURRENT_TAG=""
+      fi
     - ./download.sh
+    - "[ ! -z $CURRENT_TAG ] || exit 0"
     - eval "$(ssh-agent -s)"
     - echo ${GH_KEY} | base64 -d > ~/id_rsa
     - chmod 0600 ~/id_rsa
