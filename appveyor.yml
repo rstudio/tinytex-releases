@@ -57,7 +57,7 @@ for:
     - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
     - git checkout master
     # if unable to apply the tag, the tag must exist, so download and exit
-    - git tag v${CURRENT_TAG} || (unset CURRENT_TAG; ./download.sh; exit 0)
+    - git tag v${CURRENT_TAG} || (unset CURRENT_TAG && ./download.sh && exit 0)
     - ./download.sh
     - eval "$(ssh-agent -s)"
     - echo ${GH_KEY} | base64 -d > ~/id_rsa
