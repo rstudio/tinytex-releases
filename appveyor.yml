@@ -13,12 +13,13 @@ artifacts:
     name: Windows binaries
   - path: installer-unix*
     name: Installer for Unix
+  - path: tinitex*
+    name: The tinitex command
   - path: choco.zip
     name: Chocolatey log
 
 deploy:
-  provider: GitHub
-  repository: yihui/tinytex-releases
+- provider: GitHub
   tag: v${CURRENT_TAG}
   release: TinyTeX v${CURRENT_TAG}
   description: >
@@ -30,8 +31,19 @@ deploy:
   auth_token:
     secure: 7J9/ZS/EeHhAuxS+mtlT7mPKyLSEmXHRXK1fhBGSptLTmcIFqTbdRHRcTcgEB89n
   on:
-    branch: master
     TINYTEX_RELEASE: true
+- provider: GitHub
+  tag: daily
+  release: TinyTeX daily build
+  description: >
+    This release contains the daily build of TinyTeX. Please see
+    https://github.com/yihui/tinytex-releases for more info.
+  prerelease: true
+  force_update: true
+  auth_token:
+    secure: 7J9/ZS/EeHhAuxS+mtlT7mPKyLSEmXHRXK1fhBGSptLTmcIFqTbdRHRcTcgEB89n
+  on:
+    TINYTEX_RELEASE: ""
 
 for:
 -
@@ -44,21 +56,14 @@ for:
     - "[ ${APPVEYOR_REPO_BRANCH} != master ] && exit 0 || true"
     - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
     - git checkout master
-    - git tag v${CURRENT_TAG} || exit 0  # if unable to apply the tag, the tag must exist, so exit
+    # if unable to apply the tag, the tag must exist, so download and exit
+    - git tag v${CURRENT_TAG} || (unset CURRENT_TAG; ./download.sh; exit 0)
+    - ./download.sh
     - eval "$(ssh-agent -s)"
     - echo ${GH_KEY} | base64 -d > ~/id_rsa
     - chmod 0600 ~/id_rsa
     - ssh-add ~/id_rsa
     - export TINYTEX_RELEASE=true
-    - |
-      for EXT in zip tgz tar.gz
-      do
-        for BASE in '' -0 -1
-        do
-          wget -O TinyTeX${BASE}-v${CURRENT_TAG}.${EXT} https://yihui.org/tinytex/TinyTeX${BASE}.${EXT}
-        done
-      done
-      wget -O installer-unix-v${CURRENT_TAG}.tar.gz https://yihui.org/tinytex/installer-unix.tar.gz
     - sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
     - sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
     - git config user.email "xie@yihui.name"
