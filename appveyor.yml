@@ -62,20 +62,22 @@ for:
         CURRENT_TAG=""
       fi
     - ./download.sh
-    - "[ ! -z $CURRENT_TAG ] || exit 0"
-    - eval "$(ssh-agent -s)"
-    - echo ${GH_KEY} | base64 -d > ~/id_rsa
-    - chmod 0600 ~/id_rsa
-    - ssh-add ~/id_rsa
-    - export TINYTEX_RELEASE=true
-    - sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
-    - sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
-    - git config user.email "xie@yihui.name"
-    - git config user.name "Yihui Xie"
-    - git add -u
-    - git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
-    - git tag -f v${CURRENT_TAG}  # actually tag this commit
-    - git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git master
+    - |
+      if [ ! -z $CURRENT_TAG ]; then
+        eval "$(ssh-agent -s)"
+        echo ${GH_KEY} | base64 -d > ~/id_rsa
+        chmod 0600 ~/id_rsa
+        ssh-add ~/id_rsa
+        export TINYTEX_RELEASE=true
+        sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
+        sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
+        git config user.email "xie@yihui.name"
+        git config user.name "Yihui Xie"
+        git add -u
+        git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
+        git tag -f v${CURRENT_TAG}  # actually tag this commit
+        git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git master
+      fi
 
 -
   matrix:
