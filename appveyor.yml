@@ -50,12 +50,15 @@ for:
   matrix:
     only:
       - image: Ubuntu
+  branches:
+    only:
+      - master
+  skip_tags: true
+
 
   install:
     - "[ ! -z ${GH_KEY} ] || exit 0"
-    - "[ ${APPVEYOR_REPO_BRANCH} != master ] && exit 0 || true"
     - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
-    - git checkout master
     # if the tag must exist, download and exit (deploy the daily build)
     - |
       if [ $(git tag -l "v${CURRENT_TAG}") ]; then
