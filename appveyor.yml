@@ -41,7 +41,7 @@ deploy:
   auth_token:
     secure: 7J9/ZS/EeHhAuxS+mtlT7mPKyLSEmXHRXK1fhBGSptLTmcIFqTbdRHRcTcgEB89n
   on:
-    TINYTEX_RELEASE: ""
+    TINYTEX_RELEASE: daily
 
 for:
 -
@@ -52,7 +52,6 @@ for:
     only:
       - master
   skip_tags: true
-
 
   install:
     - "[ ! -z ${GH_KEY} ] || exit 0"
@@ -74,6 +73,7 @@ for:
       if [ -z $CURRENT_TAG ]; then
         git push --delete git@github.com:${APPVEYOR_REPO_NAME}.git daily
         git tag -f daily  # force tag the current commit to be 'daily'
+        export TINYTEX_RELEASE=daily
       else
         export TINYTEX_RELEASE=true
         sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
