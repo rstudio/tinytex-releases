@@ -84,7 +84,7 @@ for:
         git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
         git tag -f v${CURRENT_TAG}  # actually tag this commit
       fi
-      git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git HEAD
+      git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git master
 
 -
   matrix:
