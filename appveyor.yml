@@ -96,10 +96,7 @@ for:
     - choco uninstall -y tinytex
     - 7z a ../choco.zip C:\ProgramData\chocolatey\logs\chocolatey.log
     - ps: |
-        if ($Env:APPVEYOR_REPO_TAG_NAME -eq "daily") {
-          Exit-AppVeyorBuild
-        }
-        if ($Env:APPVEYOR_REPO_TAG -eq "true") {
+        if ( ($Env:APPVEYOR_REPO_TAG -eq "true") -and ($Env:APPVEYOR_REPO_TAG_NAME -ne "daily") ) {
           choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
           choco push --source https://push.chocolatey.org/
         }
