@@ -15,8 +15,6 @@ artifacts:
     name: Installer for Unix
   - path: tinitex*
     name: The tinitex command
-  - path: choco.zip
-    name: Chocolatey log
 
 deploy:
 - provider: GitHub
