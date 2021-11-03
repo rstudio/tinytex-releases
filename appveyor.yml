@@ -71,8 +71,6 @@ for:
     - ./download.sh
     - |
       if [ -z $CURRENT_TAG ]; then
-        git push --delete git@github.com:${APPVEYOR_REPO_NAME}.git daily
-        git tag -f daily  # force tag the current commit to be 'daily'
         export TINYTEX_RELEASE=daily
       else
         export TINYTEX_RELEASE=true
