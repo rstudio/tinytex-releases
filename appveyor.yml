@@ -81,6 +81,12 @@ for:
         git tag -f v${CURRENT_TAG}  # actually tag this commit
       fi
       git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git $APPVEYOR_REPO_BRANCH
+  before_deploy:
+    - |
+      if [ $TINYTEX_RELEASE == "daily" ]; then
+        git tag -f daily
+        git push -f --tags git@github.com:${APPVEYOR_REPO_NAME}.git
+      fi
 
 -
   matrix:
