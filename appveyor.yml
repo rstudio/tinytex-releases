@@ -70,6 +70,10 @@ for:
         }
     - cd ..
     - ps: |
+        if ($Env:APPVEYOR_REPO_TAG -eq "true") {
+          Exit-AppVeyorBuild
+        }
+    - ps: |
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest https://yihui.org/tinytex/install-bin-windows.bat -OutFile install-bin-windows.bat
     - install-bin-windows.bat
     - call "%APPDATA%\\TinyTeX\\bin\\win32\\tlmgr" install scheme-full
