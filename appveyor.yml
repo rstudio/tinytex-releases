@@ -48,11 +48,10 @@ for:
       git tag -f $TINYTEX_RELEASE
       git push -f --tags git@github.com:${APPVEYOR_REPO_NAME}.git $APPVEYOR_REPO_BRANCH
     - |
-      if [ $TINYTEX_RELEASE = 'daily' ]; then
-        gh release upload $TINYTEX_RELEASE TinyTeX.* tinitex.* --clobber
-      else
-        gh release create $TINYTEX_RELEASE TinyTeX.* tinitex.* -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
+      if [ $TINYTEX_RELEASE != 'daily' ]; then
+        gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
       fi
+    - gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix.tar.gz --clobber
 
 -
   matrix:
@@ -69,6 +68,7 @@ for:
           choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
           choco push --source https://push.chocolatey.org/
         }
+    - cd ..
     - ps: |
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest https://yihui.org/tinytex/install-bin-windows.bat -OutFile install-bin-windows.bat
     - install-bin-windows.bat
