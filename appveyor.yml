@@ -8,45 +8,6 @@ environment:
 
 build: off
 
-artifacts:
-  - path: TinyTeX*.tar.gz
-    name: Linux binaries
-  - path: TinyTeX*.tgz
-    name: macOS binaries
-  - path: TinyTeX*.zip
-    name: Windows binaries
-  - path: installer-unix*
-    name: Installer for Unix
-  - path: tinitex*
-    name: The tinitex command
-
-deploy:
-- provider: GitHub
-  tag: v${CURRENT_TAG}
-  release: TinyTeX v${CURRENT_TAG}
-  description: >
-    `TinyTeX-0` contains the `infraonly` scheme of TeX Live, without any LaTeX
-    packages. `TinyTeX-1` contains enough LaTeX packages to compile R Markdown
-    documents. `TinyTeX` contains even more LaTeX packages. The `zip` packages
-    are for Windows. The `tgz` packages are for macOS. The `tar.gz` packages are
-    for Linux. Please see https://github.com/yihui/tinytex-releases for more info.
-  auth_token:
-    secure: 7J9/ZS/EeHhAuxS+mtlT7mPKyLSEmXHRXK1fhBGSptLTmcIFqTbdRHRcTcgEB89n
-  on:
-    TINYTEX_RELEASE: true
-- provider: GitHub
-  tag: daily
-  release: TinyTeX daily build
-  description: >
-    This release contains the daily build of TinyTeX. Please see
-    https://github.com/yihui/tinytex-releases for more info.
-  prerelease: true
-  force_update: true
-  auth_token:
-    secure: 7J9/ZS/EeHhAuxS+mtlT7mPKyLSEmXHRXK1fhBGSptLTmcIFqTbdRHRcTcgEB89n
-  on:
-    TINYTEX_RELEASE: daily
-
 for:
 -
   matrix:
@@ -73,26 +34,24 @@ for:
         CURRENT_TAG=""
       fi
     - ./download.sh
+    - ./install-gh.sh
     - |
       if [ -z $CURRENT_TAG ]; then
         export TINYTEX_RELEASE=daily
-        ./install-gh.sh
-        gh release upload daily TinyTeX-2.tar.gz --clobber
-        rm TinyTeX-2.tar.gz
       else
-        export TINYTEX_RELEASE=true
+        export TINYTEX_RELEASE=v${CURRENT_TAG}
         sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
         sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
         git add -u
         git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
-        git tag -f v${CURRENT_TAG}  # actually tag this commit
       fi
-      git push --tags git@github.com:${APPVEYOR_REPO_NAME}.git $APPVEYOR_REPO_BRANCH
-  before_deploy:
+      git tag -f $TINYTEX_RELEASE
+      git push -f --tags git@github.com:${APPVEYOR_REPO_NAME}.git $APPVEYOR_REPO_BRANCH
     - |
-      if [ $TINYTEX_RELEASE == "daily" ]; then
-        git tag -f daily
-        git push -f --tags git@github.com:${APPVEYOR_REPO_NAME}.git
+      if [ $TINYTEX_RELEASE = 'daily' ]; then
+        gh release upload $TINYTEX_RELEASE TinyTeX.* tinitex.* --clobber
+      else
+        gh release create $TINYTEX_RELEASE TinyTeX.* tinitex.* -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
       fi
 
 -
@@ -116,18 +75,18 @@ for:
     - call "%APPDATA%\\TinyTeX\\bin\\win32\\tlmgr" install scheme-full
     - ps: Compress-Archive $Env:APPDATA\\TinyTeX TinyTeX-2.zip
     - choco install gh
+    - refreshenv
     - gh release upload daily TinyTeX-2.zip --clobber
-    - del TinyTeX-2.zip
 
 -
   matrix:
     only:
       - image: macOS
+  skip_tags: true
 
   install:
     - "curl -sL https://yihui.org/tinytex/install-bin-unix.sh | sh"
-    - tlmgr install scheme-full
+    - tlmgr install scheme-full || true
     - tar zcf TinyTeX-2.tgz -C ~/Library TinyTeX
     - brew install gh
     - gh release upload daily TinyTeX-2.tgz --clobber
-    - rm TinyTeX-2.tgz
