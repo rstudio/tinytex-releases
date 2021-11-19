@@ -1,6 +1,10 @@
 image:
   - Ubuntu
+  - macOS
   - Visual Studio 2019
+
+environment:
+  TINYTEX_INSTALLER: TinyTeX
 
 build: off
 
@@ -72,6 +76,9 @@ for:
     - |
       if [ -z $CURRENT_TAG ]; then
         export TINYTEX_RELEASE=daily
+        ./install-gh.sh
+        gh release upload daily TinyTeX-2.tar.gz --clobber
+        rm TinyTeX-2.tar.gz
       else
         export TINYTEX_RELEASE=true
         sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
@@ -103,3 +110,24 @@ for:
           choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
           choco push --source https://push.chocolatey.org/
         }
+    - ps: |
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest https://yihui.org/tinytex/install-bin-windows.bat -OutFile install-bin-windows.bat
+    - install-bin-windows.bat
+    - call "%APPDATA%\\TinyTeX\\bin\\win32\\tlmgr" install scheme-full
+    - ps: Compress-Archive $Env:APPDATA\\TinyTeX TinyTeX-2.zip
+    - choco install gh
+    - gh release upload daily TinyTeX-2.zip --clobber
+    - del TinyTeX-2.zip
+
+-
+  matrix:
+    only:
+      - image: macOS
+
+  install:
+    - "curl -sL https://yihui.org/tinytex/install-bin-unix.sh | sh"
+    - tlmgr install scheme-full
+    - tar zcf TinyTeX-2.tgz -C ~/Library TinyTeX
+    - brew install gh
+    - gh release upload daily TinyTeX-2.tgz --clobber
+    - rm TinyTeX-2.tgz
