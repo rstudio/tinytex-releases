@@ -1,0 +1,51 @@
+on:
+  push:
+  schedule:
+    - cron: '0 10 * * * '
+
+name: texlive-full
+
+jobs:
+  texlive-full:
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: windows-latest}
+          - {os: macOS-latest}
+          - {os: ubuntu-18.04}
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      TINYTEX_INSTALLER: TinyTeX
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install TinyTeX on Unix
+        if: runner.os == 'Linux' || runner.os == 'macOS'
+        run: |
+          curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+          export PATH=$HOME/bin:$PATH
+          tlmgr install scheme-full
+          if [ $RUNNER_OS = "Linux" ]; then
+            tar zcf TinyTeX-2.tgz -C ~/Library TinyTeX
+          else
+            tar zcf TinyTeX-2.tar.gz -C ~ .TinyTeX
+          fi
+
+      - name: Install TinyTeX on Windows
+        if: runner.os == 'Windows'
+        run: |
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest https://yihui.org/tinytex/install-bin-windows.bat -OutFile install-bin-windows.bat
+          .\install-bin-windows.bat
+          Start-Process -NoNewWindow -FilePath "$Env:APPDATA\TinyTeX\bin\win32\tlmgr" -ArgumentList "install scheme-full"
+          Compress-Archive $Env:APPDATA\TinyTeX TinyTeX-2.zip
+
+      - name: Publish TinyTeX-2
+        run: |
+          gh release upload daily TinyTeX-2.* --clobber
