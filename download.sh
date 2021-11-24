@@ -20,5 +20,6 @@ if [ -z $CURRENT_TAG ]; then
   tar xzf TinyTeX.tar.gz
   ./.TinyTeX/bin/*/tlmgr install scheme-full
   tar zcf TinyTeX-2.tar.gz .TinyTeX
+  ls -lh TinyTeX*
   rm -r .TinyTeX
 fi
