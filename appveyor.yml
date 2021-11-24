@@ -80,7 +80,7 @@ for:
     - ps: Compress-Archive $Env:APPDATA\\TinyTeX TinyTeX-2.zip
     - choco install gh
     - refreshenv
-    - gh release upload daily TinyTeX-2.zip --clobber
+    - gh release upload daily TinyTeX-2.zip --clobber -R %APPVEYOR_REPO_NAME%
 
 -
   matrix:
