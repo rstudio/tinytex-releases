@@ -50,8 +50,10 @@ for:
     - |
       if [ $TINYTEX_RELEASE != 'daily' ]; then
         gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
+        gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix*.tar.gz --clobber
+      else
+        gh release upload $TINYTEX_RELEASE TinyTeX* --clobber
       fi
-    - gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix*.tar.gz --clobber
 
 -
   matrix:
