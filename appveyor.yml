@@ -78,6 +78,7 @@ for:
     - ps: |
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest https://yihui.org/tinytex/install-bin-windows.bat -OutFile install-bin-windows.bat
     - install-bin-windows.bat
+    - call "%APPDATA%\\TinyTeX\\bin\\win32\\tlmgr" update --self
     - call "%APPDATA%\\TinyTeX\\bin\\win32\\tlmgr" install scheme-full
     - ps: Compress-Archive $Env:APPDATA\\TinyTeX TinyTeX-2.zip
     - choco install gh
