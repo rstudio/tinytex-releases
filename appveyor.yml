@@ -27,6 +27,7 @@ for:
       ssh-add ~/id_rsa
       git config user.email "xie@yihui.name"
       git config user.name "Yihui Xie"
+      git checkout $APPVEYOR_REPO_BRANCH
     - export CURRENT_TAG=$(date "+%Y.%m")$TINYTEX_PATCH_VERSION
     # if the tag must exist, download and exit (deploy the daily build)
     - |
