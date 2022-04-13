@@ -56,23 +56,18 @@ jobs:
 
       - name: Create Git tag
         run: |
-          echo $TINYTEX_RELEASE
-          git status
-          git log -n3
-          # git tag -f $TINYTEX_RELEASE
-          # git push -f --tags
+          git tag -f $TINYTEX_RELEASE
+          git push -f --tags
 
       - name: Create new Github release
         if: ${{ env.TINYTEX_RELEASE != 'daily'}}
         env:
           GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         run: |
-          echo $TINYTEX_RELEASE
-          # gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
-          # gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix*.tar.gz --clobber
+          gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
+          gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix*.tar.gz --clobber
 
       - name: update daily release
         if: ${{ env.TINYTEX_RELEASE == 'daily'}}
         run: |
-          echo $TINYTEX_RELEASE
-          # gh release upload $TINYTEX_RELEASE TinyTeX* --clobber
+          gh release upload $TINYTEX_RELEASE TinyTeX* --clobber
