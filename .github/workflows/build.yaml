@@ -1,0 +1,72 @@
+on:
+  workflow_dispatch:
+    inputs:
+      patch_version:
+        description: 'to control the patch version of TinyTeX (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
+        required: false   
+#   schedule: 
+#     - cron: '5 4 * * *'
+
+    
+name: Build TinyTeX Bundles
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    name: Build Bundles For Linux
+
+    env:
+      TINYTEX_INSTALLER: TinyTeX
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+
+      - name: Current Tag to target
+        run: |
+          patch_version=${{ github.event.inputs.patch_version }}
+          [ ! -z $patch_version ] && patch_version="."$patch_version
+          current_tag="$(date '+%Y.%m')${patch_version}"
+          tinytex_release="v${current_tag}"
+          # if the tag exist,target daily build only
+          if [ $(git tag -l "v${current_tag}") ]; then
+            current_tag=""
+            tinytex_release="daily"
+          fi
+          echo "CURRENT_TAG=$current_tag" >> $GITHUB_ENV
+          echo "TINYTEX_RELEASE=$tinytex_release" >> $GITHUB_ENV
+          
+      - name: Download TinyTeX bundles
+        run: ./download.sh
+      
+      - name: Update chocolatey package
+        if: ${{ env.TINYTEX_RELEASE != 'daily'}}
+        run: |
+            sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
+            sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
+            git add -u
+            git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
+
+      - name: Create Git tag
+        run: |
+          echo $TINYTEX_RELEASE
+          git status
+          git log -n3
+          # git tag -f $TINYTEX_RELEASE
+          # git push -f --tags
+
+      - name: Create new Github release
+        if: ${{ env.TINYTEX_RELEASE != 'daily'}}
+        env:
+          GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        run: |
+          echo $TINYTEX_RELEASE
+          # gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
+          # gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix*.tar.gz --clobber
+
+      - name: update daily release
+        if: ${{ env.TINYTEX_RELEASE == 'daily'}}
+        run: |
+          echo $TINYTEX_RELEASE
+          # gh release upload $TINYTEX_RELEASE TinyTeX* --clobber
