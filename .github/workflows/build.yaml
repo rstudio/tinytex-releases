@@ -37,6 +37,7 @@ jobs:
           tinytex_release="v${current_tag}"
           # if the tag exist,target daily build only
           if [ $(git tag -l "v${current_tag}") ]; then
+            echo "Tag already exist"
             current_tag=""
             tinytex_release="daily"
           fi
