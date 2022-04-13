@@ -62,12 +62,14 @@ jobs:
       - name: Create new Github release
         if: ${{ env.TINYTEX_RELEASE != 'daily'}}
         env:
-          GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE"
           gh release upload $TINYTEX_RELEASE TinyTeX* tinitex.* installer-unix*.tar.gz --clobber
 
       - name: update daily release
         if: ${{ env.TINYTEX_RELEASE == 'daily'}}
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload $TINYTEX_RELEASE TinyTeX* --clobber
