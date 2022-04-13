@@ -3,7 +3,8 @@ on:
     inputs:
       patch_version:
         description: 'to control the patch version of TinyTeX (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
-        required: false   
+        required: false
+        type: string
 #   schedule: 
 #     - cron: '5 4 * * *'
 
@@ -22,6 +23,11 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Current Tag to target
         run: |
