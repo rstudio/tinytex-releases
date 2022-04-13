@@ -57,6 +57,7 @@ jobs:
       - name: Create Git tag
         run: |
           git tag -f $TINYTEX_RELEASE
+          git push
           git push -f --tags
 
       - name: Create new Github release
