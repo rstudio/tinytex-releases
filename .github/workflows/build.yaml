@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
     
-name: Build TinyTeX Bundles
+name: Build Daily TinyTeX Full Bundles
 
 env:
   TINYTEX_INSTALLER: TinyTeX

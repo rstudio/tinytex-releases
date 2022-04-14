@@ -5,7 +5,7 @@ on:
     tags:
       - v*
     
-name: Build Choco package
+name: Build Choco package & Publish
 
 jobs:
   build-windows:
