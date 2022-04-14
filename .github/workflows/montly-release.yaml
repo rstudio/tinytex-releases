@@ -15,7 +15,6 @@ name: Publish Monthly Release
 
 jobs:
   build-linux:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     name: Build Bundles For Linux
 
