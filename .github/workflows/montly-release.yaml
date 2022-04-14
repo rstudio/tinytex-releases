@@ -61,6 +61,7 @@ jobs:
         working-directory: ${{ runner.temp }}/tinytex-bundles
         run: |
           gh release download daily
+          [ -f regex.tar.gz ] && rm regex.tar.gz
           # rename files adding version
           for f in TinyTeX*; do mv $f $(echo "$f" | sed "s/^TinyTeX[^.]*/&-${TINYTEX_RELEASE}/"); done
           mv installer-unix.tar.gz install-unix-${TINYTEX_RELEASE}.tar.gz
