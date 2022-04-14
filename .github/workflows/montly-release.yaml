@@ -1,0 +1,80 @@
+on:
+  # Manual trigger mainly to create patch version
+  workflow_dispatch:
+    inputs:
+      patch_version:
+        description: 'to control the patch version of TinyTeX (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
+        required: false
+        type: string
+#  # Monthly release 
+#   schedule: 
+#     - cron: '10 2 1 * *'
+
+    
+name: Build TinyTeX Bundles
+
+jobs:
+  build-linux:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    name: Build Bundles For Linux
+
+    env:
+      TINYTEX_INSTALLER: TinyTeX
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: cderv/tinytex-releases
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+        with:
+          # needed to get the tags
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Current tag to target
+        run: |
+          # Are we making a patch version ? 
+          patch_version=${{ github.event.inputs.patch_version }}
+          [ ! -z $patch_version ] && patch_version="."$patch_version
+          # if so, append to usual montly number
+          current_tag="$(date '+%Y.%m')${patch_version}"
+          tinytex_release="v${current_tag}"
+          echo $current_tag
+          echo $tinytex_release
+          echo $(git tag -l "${tinytex_release}")
+          # if the tag exist, we fail
+          if [ $(git tag -l "${tinytex_release}") ]; then
+            echo "::error::Tag already ${tinytex_release} exist"
+            exit 1
+          fi
+          echo "CURRENT_TAG=$current_tag" >> $GITHUB_ENV
+          echo "TINYTEX_RELEASE=$tinytex_release" >> $GITHUB_ENV
+
+      - name: Update chocolatey package info
+        run: |
+            sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
+            sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
+            git add -u
+            git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
+        
+      - name: Download TinyTeX from daily release
+        working-directory: ${{ runner.temp }}/tinytex-bundles/*
+        run: |
+          gh release download daily
+      
+      - name: Create Git tag
+        run: |
+          git tag -f $TINYTEX_RELEASE
+          git push
+          git push -f --tags
+
+      - name: Create new Github release
+        run: |
+          gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE" ${{ runner.temp }}/tinytex-bundles/*
+
+
