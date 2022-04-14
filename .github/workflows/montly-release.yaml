@@ -43,9 +43,8 @@ jobs:
           # if so, append to usual montly number
           current_tag="$(date '+%Y.%m')${patch_version}"
           tinytex_release="v${current_tag}"
-          echo $current_tag
-          echo $tinytex_release
-          echo $(git tag -l "${tinytex_release}")
+          echo "current dated tag is $current_tag"
+          echo "tinytex release tag will be $tinytex_release"
           # if the tag exist, we fail
           if [ $(git tag -l "${tinytex_release}") ]; then
             echo "::error::Tag already ${tinytex_release} exist"
