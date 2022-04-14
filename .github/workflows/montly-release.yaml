@@ -60,6 +60,10 @@ jobs:
             sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
             git add -u
             git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
+
+      - name: Create download directory
+        run: |
+          mkdir ${{ runner.temp }}/tinytex-bundles
         
       - name: Download TinyTeX from daily release
         working-directory: ${{ runner.temp }}/tinytex-bundles
