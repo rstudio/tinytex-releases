@@ -71,7 +71,7 @@ jobs:
           echo "::endgroup::"
           echo "::group::Rename files adding montly version"
           for f in TinyTeX*; do mv $f $(echo "$f" | sed "s/^TinyTeX[^.]*/&-${TINYTEX_RELEASE}/"); done
-          mv installer-unix.tar.gz install-unix-v${TINYTEX_RELEASE}.tar.gz
+          mv installer-unix.tar.gz install-unix-${TINYTEX_RELEASE}.tar.gz
           echo "::endgroup::"
 
       - name: Update chocolatey package info
