@@ -33,7 +33,7 @@ jobs:
 
       - name: update daily release
         run: |
-          gh release upload $TINYTEX_RELEASE TinyTeX-2.tar.gz --clobber
+          gh release upload daily TinyTeX-2.tar.gz --clobber
 
   build-windows:
     runs-on: windows-latest
