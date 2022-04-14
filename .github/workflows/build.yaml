@@ -50,6 +50,9 @@ jobs:
         & "$Env:APPDATA\TinyTeX\bin\win32\tlmgr" update --self
         & "$Env:APPDATA\TinyTeX\bin\win32\tlmgr" install scheme-full
         Compress-Archive $Env:APPDATA\\TinyTeX TinyTeX-2.zip
+
+    - name: update daily release
+      run: |
         gh release upload daily TinyTeX-2.zip --clobber
 
 
