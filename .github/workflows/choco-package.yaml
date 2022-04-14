@@ -1,9 +1,19 @@
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Wether to publish or not the package on chocolatey
+        required: false
+        type: boolean
+        default: false
   # triggered when a new montly build create a tag
-  push: 
-    tags:
-      - v*
+  workflow_call:
+    inputs:
+      publish:
+        description: Wether to publish or not the package on chocolatey
+        required: false
+        type: boolean
+        default: false
     
 name: Build Choco package & Publish
 
@@ -24,9 +34,10 @@ jobs:
         choco uninstall -y tinytex
 
     - name: Publish Choco Package
-      if: ${{ false }} # ${{ github.event_name == 'push' && contains(github.event.ref, "tags/v") }}
+      env: 
+        CHOCO_KEY: ${{ secrets.CHOCO_KEY }}
+      if: ${{ inputs.publish }}
       run: |
-        if ( ($Env:APPVEYOR_REPO_TAG -eq "true") -and ($Env:APPVEYOR_REPO_TAG_NAME -ne "daily") ) {
-          choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
-          choco push --source https://push.chocolatey.org/
-        }
+        echo "deploying to chocolatey"
+        # choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
+        # choco push --source https://push.chocolatey.org/
