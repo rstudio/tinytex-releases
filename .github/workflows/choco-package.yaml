@@ -25,6 +25,9 @@ jobs:
     steps:
     - name: Clone repo
       uses: actions/checkout@v3
+      with:
+        # required to be sure to get the last commit
+        ref: master
 
     - name: Build Choco package
       working-directory: choco
