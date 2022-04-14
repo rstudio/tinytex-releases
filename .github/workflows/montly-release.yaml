@@ -16,7 +16,7 @@ name: Publish Monthly Release
 jobs:
   build-linux:
     runs-on: ubuntu-latest
-    name: Build Bundles For Linux
+    name: Publish Montly release
 
     env:
       TINYTEX_INSTALLER: TinyTeX
@@ -37,21 +37,27 @@ jobs:
 
       - name: Current tag to target
         run: |
+          echo "::group::Checking patch version"
           # Are we making a patch version ? 
           patch_version=${{ github.event.inputs.patch_version }}
           [ ! -z $patch_version ] && patch_version="."$patch_version
-          # if so, append to usual montly number
+          echo "::endgroup::"
+          echo "::group::Create variables with version to build"
           current_tag="$(date '+%Y.%m')${patch_version}"
           tinytex_release="v${current_tag}"
           echo "current dated tag is $current_tag"
           echo "tinytex release tag will be $tinytex_release"
-          # if the tag exist, we fail
+          echo "::endgroup::"
+          echo "::group::Check tag for this version does not exist yet"
           if [ $(git tag -l "${tinytex_release}") ]; then
             echo "::error::Tag already ${tinytex_release} exist"
             exit 1
           fi
+          echo "::endgroup::"
+          echo "::group::Export variable as env var"
           echo "CURRENT_TAG=$current_tag" >> $GITHUB_ENV
           echo "TINYTEX_RELEASE=$tinytex_release" >> $GITHUB_ENV
+          echo "::endgroup::"
 
       - name: Create download directory
         run: |
@@ -60,10 +66,13 @@ jobs:
       - name: Download TinyTeX from daily release
         working-directory: ${{ runner.temp }}/tinytex-bundles
         run: |
+          echo "::group::Download last daily release assets"
           gh release download daily
-          # rename files adding version
+          echo "::endgroup::"
+          echo "::group::Rename files adding montly version"
           for f in TinyTeX*; do mv $f $(echo "$f" | sed "s/^TinyTeX[^.]*/&-${TINYTEX_RELEASE}/"); done
           mv installer-unix.tar.gz install-unix-v${TINYTEX_RELEASE}.tar.gz
+          echo "::endgroup::"
 
       - name: Update chocolatey package info
         run: |
