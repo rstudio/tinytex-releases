@@ -80,4 +80,7 @@ jobs:
         run: |
           gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE" ${{ runner.temp }}/tinytex-bundles/*
 
-
+      - name: Build & Deploy Choco package
+        uses: ./.github/workflows/choco-package.yaml
+        with:
+          publish: false
