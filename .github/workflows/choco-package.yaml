@@ -2,15 +2,15 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: Wether to publish or not the package on chocolatey
+        description: Whether to publish or not the package on chocolatey
         required: false
         type: boolean
         default: false
-  # triggered when a new montly build create a tag
+  # triggered when a new monthly build create a tag
   workflow_call:
     inputs:
       publish:
-        description: Wether to publish or not the package on chocolatey
+        description: Whether to publish or not the package on chocolatey
         required: false
         type: boolean
         default: false
