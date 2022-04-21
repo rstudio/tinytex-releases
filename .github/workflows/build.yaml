@@ -45,7 +45,7 @@ jobs:
 
     - name: Build Full TinyTeX
       run: |
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest https://yihui.org/tinytex/install-bin-windows.bat -OutFile install-bin-windows.bat
+        curl -OL https://yihui.org/tinytex/install-bin-windows.bat
         ./install-bin-windows.bat
         & "$Env:APPDATA\TinyTeX\bin\win32\tlmgr" update --self
         & "$Env:APPDATA\TinyTeX\bin\win32\tlmgr" install scheme-full
