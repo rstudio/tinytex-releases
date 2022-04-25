@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       patch_version:
-        description: 'to control the patch version of TinyTeX (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
+        description: 'Set the day of the patch version to create (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
         required: false
         type: string
   # Monthly release 
