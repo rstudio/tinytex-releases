@@ -93,4 +93,4 @@ jobs:
     uses: ./.github/workflows/choco-package.yaml
     with:
       # if manually trigger, then we use the value from the inputs
-      publish: ${{ (inputs.publish_choco == '' && true) || inputs.publish_choco }}
+      publish: ${{ (github.event.inputs.publish_choco == '' && true) || github.event.inputs.publish_choco }}
