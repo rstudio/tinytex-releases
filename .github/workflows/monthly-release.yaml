@@ -6,9 +6,9 @@ on:
         description: 'to control the patch version of TinyTeX (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
         required: false
         type: string
-#  # Monthly release 
-#   schedule: 
-#     - cron: '10 2 1 * *'
+  # Monthly release 
+    schedule: 
+      - cron: '23 7 1 * *'
 
     
 name: Publish Monthly Release
@@ -21,7 +21,7 @@ jobs:
     env:
       TINYTEX_INSTALLER: TinyTeX
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GH_REPO: cderv/tinytex-releases
+      GH_REPO: ${{ github.repository }}
 
     steps:
       - name: Clone repo
@@ -87,4 +87,4 @@ jobs:
     needs: [build-linux]
     uses: ./.github/workflows/choco-package.yaml
     with:
-      publish: false
+      publish: true
