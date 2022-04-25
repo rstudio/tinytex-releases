@@ -1,0 +1,46 @@
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Whether to publish or not the package on chocolatey
+        required: false
+        type: boolean
+        default: false
+  # triggered when a new monthly build create a tag
+  workflow_call:
+    inputs:
+      publish:
+        description: Whether to publish or not the package on chocolatey
+        required: false
+        type: boolean
+        default: false
+    
+name: Build Choco package & Publish
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    name: Build chocolatey package
+
+    steps:
+    - name: Clone repo
+      uses: actions/checkout@v3
+      with:
+        # required to be sure to get the last commit
+        ref: master
+
+    - name: Build Choco package
+      working-directory: choco
+      run: |
+        choco pack
+        choco install --no-progress tinytex -source .
+        choco uninstall -y tinytex
+
+    - name: Publish Choco Package
+      env: 
+        CHOCO_KEY: ${{ secrets.CHOCO_KEY }}
+      if: ${{ inputs.publish }}
+      run: |
+        echo "deploying to chocolatey"
+        choco apikey --key $Env:CHOCO_KEY --source https://push.chocolatey.org/
+        choco push --source https://push.chocolatey.org/
