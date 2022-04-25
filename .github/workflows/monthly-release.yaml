@@ -6,6 +6,11 @@ on:
         description: 'Set the day of the patch version to create (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
         required: false
         type: string
+      publish_choco:
+        description: 'Should we publish choco version' 
+        required: true
+        type: boolean
+        default: false
   # Monthly release 
     schedule: 
       - cron: '23 7 1 * *'
@@ -87,4 +92,5 @@ jobs:
     needs: [build-linux]
     uses: ./.github/workflows/choco-package.yaml
     with:
-      publish: true
+      # if manually trigger, then we use the value from the inputs
+      publish: ${{ (inputs.publish_choco == '' && true) || inputs.publish_choco }}
