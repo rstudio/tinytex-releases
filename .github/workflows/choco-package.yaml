@@ -40,6 +40,7 @@ jobs:
         choco uninstall -y tinytex
 
     - name: Publish Choco Package
+      working-directory: choco
       env: 
         CHOCO_KEY: ${{ secrets.CHOCO_KEY }}
       if: ${{ inputs.publish }}
