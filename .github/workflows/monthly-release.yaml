@@ -94,3 +94,5 @@ jobs:
     with:
       # if manually trigger, then we use the value from the inputs
       publish: ${{ fromJSON( (github.event.inputs.publish_choco == '' && true) || github.event.inputs.publish_choco ) }}
+    secrets:
+      CHOCO_KEY: ${{ secrets.CHOCO_KEY }}
