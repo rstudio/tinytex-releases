@@ -1,7 +1,6 @@
 # TinyTeX releases for Windows, macOS, and Linux
 
-[![Build
-status](https://ci.appveyor.com/api/projects/status/2ortb2mqkm2fjg4k/branch/master?svg=true)](https://ci.appveyor.com/project/yihui/tinytex-releases/branch/master)
+[![Publish Monthly Release](https://github.com/yihui/tinytex-releases/actions/workflows/monthly-release.yaml/badge.svg)](https://github.com/yihui/tinytex-releases/actions/workflows/monthly-release.yaml)
 
 <a href="https://yihui.org/tinytex/"><img src="https://yihui.org/images/logo-tinytex.png" alt="tinytex logo" align="right" width="200px"/></a>
 
