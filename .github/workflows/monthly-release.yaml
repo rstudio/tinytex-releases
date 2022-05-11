@@ -3,19 +3,19 @@ on:
   workflow_dispatch:
     inputs:
       patch_version:
-        description: 'Set the day of the patch version to create (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary' 
+        description: 'Set the day of the patch version to create (i.e., z in x.y.z), so we could release patch versions like 2020.09.19 when necessary'
         required: false
         type: string
       publish_choco:
-        description: 'Should we publish choco version' 
+        description: 'Should we publish choco version'
         required: true
         type: boolean
         default: false
-  # Monthly release 
-    schedule: 
+  # Monthly release
+    schedule:
       - cron: '23 7 1 * *'
 
-    
+
 name: Publish Monthly Release
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
 
       - name: Current tag to target
         run: |
-          # Are we making a patch version ? 
+          # Are we making a patch version ?
           patch_version=${{ github.event.inputs.patch_version }}
           [ ! -z $patch_version ] && patch_version="."$patch_version
           # if so, append to usual montly number
@@ -61,7 +61,7 @@ jobs:
       - name: Create download directory
         run: |
           mkdir ${{ runner.temp }}/tinytex-bundles
-        
+
       - name: Download TinyTeX from daily release
         working-directory: ${{ runner.temp }}/tinytex-bundles
         run: |
@@ -78,7 +78,7 @@ jobs:
           sed -i -E "s|(\s*checksum\s*=\s*')([0-9a-f]{32})('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
           git add -u
           git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
-     
+
       - name: Create Git tag
         run: |
           git tag -f $TINYTEX_RELEASE
