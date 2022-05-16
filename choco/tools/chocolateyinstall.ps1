@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop';
 $toolsDir = Get-ToolsLocation
-$url        = "https://github.com/yihui/tinytex-releases/releases/download/v$($env:ChocolateyPackageVersion)/TinyTeX-1-v$($env:ChocolateyPackageVersion).zip"
+$url        = "https://github.com/rstudio/tinytex-releases/releases/download/v$($env:ChocolateyPackageVersion)/TinyTeX-1-v$($env:ChocolateyPackageVersion).zip"
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir
@@ -40,7 +40,7 @@ if (Test-Path "$tinytex_tmp_file") {
     ((Get-Content $tinytex_tmp_file) | Where { $tinytex_pkg_installed -NotContains $_}) | % {"Invoke-Expression '$toolsDir\TinyTeX\bin\win32\tlmgr.bat install {0}'" -f $_} > $tinytex_reinstall
     if ((Get-Content $tinytex_reinstall) -ne $null){
         Write-Host "Installing previous user installed packages"
-        Invoke-Expression "$tinytex_reinstall"    
+        Invoke-Expression "$tinytex_reinstall"
     }
     Remove-Item -force $tinytex_reinstall
     Remove-Item -force $tinytex_tmp_file

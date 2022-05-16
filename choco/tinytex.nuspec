@@ -4,7 +4,7 @@
   <metadata>
     <id>tinytex</id>
     <version>2022.05</version>
-    <packageSourceUrl>https://github.com/yihui/tinytex-releases/tree/master/choco</packageSourceUrl>
+    <packageSourceUrl>https://github.com/rstudio/tinytex-releases/tree/master/choco</packageSourceUrl>
     <owners>naveen521kk</owners>
     <title>TinyTeX</title>
     <authors>Naveen M K, Yihui Xie, TeX Live Developers</authors>
@@ -13,9 +13,9 @@
     <copyright>Copyright 2020 TeX Live Developers</copyright>
     <licenseUrl>https://tug.org/texlive/LICENSE.TL</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <projectSourceUrl>https://github.com/yihui/tinytex/</projectSourceUrl>
+    <projectSourceUrl>https://github.com/rstudio/tinytex/</projectSourceUrl>
     <docsUrl>https://yihui.org/tinytex/</docsUrl>
-    <bugTrackerUrl>https://github.com/yihui/tinytex-releases/issues</bugTrackerUrl>
+    <bugTrackerUrl>https://github.com/rstudio/tinytex-releases/issues</bugTrackerUrl>
     <tags>tinytex tex LaTeX TeXLive tiny</tags>
     <summary>A lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live </summary>
     <description>
@@ -25,7 +25,7 @@ TinyTeX is a custom LaTeX distribution based on TeX Live that is relatively smal
 
 Please see the full documentation at https://yihui.org/tinytex/.
 	</description>
-    <releaseNotes>https://github.com/yihui/tinytex-releases/releases</releaseNotes>
+    <releaseNotes>https://github.com/rstudio/tinytex-releases/releases</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

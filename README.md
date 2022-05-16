@@ -1,19 +1,19 @@
 # TinyTeX releases for Windows, macOS, and Linux
 
-[![Publish Monthly Release](https://github.com/yihui/tinytex-releases/actions/workflows/monthly-release.yaml/badge.svg)](https://github.com/yihui/tinytex-releases/actions/workflows/monthly-release.yaml)
+[![Publish Monthly Release](https://github.com/rstudio/tinytex-releases/actions/workflows/monthly-release.yaml/badge.svg)](https://github.com/rstudio/tinytex-releases/actions/workflows/monthly-release.yaml)
 
 <a href="https://yihui.org/tinytex/"><img src="https://yihui.org/images/logo-tinytex.png" alt="tinytex logo" align="right" width="200px"/></a>
 
 TinyTeX is a lightweight, cross-platform, portable, and easy-to-maintain LaTeX
 distribution based on TeX Live. You may see the Github repo
-(<https://github.com/yihui/tinytex>) and project homepage
+(<https://github.com/rstudio/tinytex>) and project homepage
 (<https://yihui.org/tinytex/>) for more info.
 
 ## Releases
 
 The binary packages of TinyTeX are published (usually monthly) to the Github
 Releases of this repository:
-<https://github.com/yihui/tinytex-releases/releases> Each release contains three
+<https://github.com/rstudio/tinytex-releases/releases> Each release contains three
 variations:
 
 -   `TinyTeX-0.*` contains the `infraonly` scheme of TeX Live, without any LaTeX
@@ -22,12 +22,12 @@ variations:
     `tlmgr install latex-bin framed`.
 
 -   `TinyTeX-1.*` contains [about 90 LaTeX
-    packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-custom.txt)
+    packages](https://github.com/rstudio/tinytex/blob/master/tools/pkgs-custom.txt)
     enough to compile common R Markdown documents (which was the original
     motivation of the TinyTeX project).
 
 -   `TinyTeX.*` contains [more LaTeX
-    packages](https://github.com/yihui/tinytex/blob/master/tools/pkgs-yihui.txt)
+    packages](https://github.com/rstudio/tinytex/blob/master/tools/pkgs-yihui.txt)
     requested by the community. The list of packages may grow as time goes by,
     and the size of this variation will grow correspondingly.
 
@@ -55,7 +55,7 @@ scripts, Chocolatey, or Scoop to install it.
 
 ### R
 
-You may use the R package [**tinytex**](https://github.com/yihui/tinytex) to
+You may use the R package [**tinytex**](https://github.com/rstudio/tinytex) to
 install TinyTeX. By default, [the function
 `tinytex::install_tinytex()`](https://yihui.org/tinytex/#for-r-users) installs
 the latest daily build of TinyTeX. If you want to install a specific version in
