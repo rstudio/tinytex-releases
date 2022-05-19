@@ -1,6 +1,7 @@
 # TinyTeX releases for Windows, macOS, and Linux
 
-[![Publish Monthly Release](https://github.com/rstudio/tinytex-releases/actions/workflows/monthly-release.yaml/badge.svg)](https://github.com/rstudio/tinytex-releases/actions/workflows/monthly-release.yaml)
+[![Publish Monthly
+Release](https://github.com/rstudio/tinytex-releases/actions/workflows/monthly-release.yaml/badge.svg)](https://github.com/rstudio/tinytex-releases/actions/workflows/monthly-release.yaml)
 
 <a href="https://yihui.org/tinytex/"><img src="https://yihui.org/images/logo-tinytex.png" alt="tinytex logo" align="right" width="200px"/></a>
 
@@ -11,39 +12,45 @@ distribution based on TeX Live. You may see the Github repo
 
 ## Releases
 
-The binary packages of TinyTeX are published (usually monthly) to the Github
-Releases of this repository:
-<https://github.com/rstudio/tinytex-releases/releases> Each release contains three
-variations:
+The pre-built binary packages of TinyTeX are published (usually monthly but also
+daily) to the Github Releases of this repository:
+<https://github.com/rstudio/tinytex-releases/releases> Each release contains the
+following variations that bundle different numbers of LaTeX packages:
 
--   `TinyTeX-0.*` contains the `infraonly` scheme of TeX Live, without any LaTeX
-    packages. If you install this variation, you may install any other packages
-    via `tlmgr` (which is a utility included in this variation), e.g.,
-    `tlmgr install latex-bin framed`.
+-   `TinyTeX-0` contains the `infraonly` scheme of TeX Live, without any LaTeX
+    packages. This is the smallest bundle. If you install this bundle, you may
+    install any other packages via `tlmgr` (which is a utility included in this
+    variation), e.g., `tlmgr install latex-bin framed`.
 
--   `TinyTeX-1.*` contains [about 90 LaTeX
+-   `TinyTeX-1` contains [about 90 LaTeX
     packages](https://github.com/rstudio/tinytex/blob/master/tools/pkgs-custom.txt)
     enough to compile common R Markdown documents (which was the original
     motivation of the TinyTeX project).
 
--   `TinyTeX.*` contains [more LaTeX
+-   `TinyTeX` contains [more LaTeX
     packages](https://github.com/rstudio/tinytex/blob/master/tools/pkgs-yihui.txt)
     requested by the community. The list of packages may grow as time goes by,
-    and the size of this variation will grow correspondingly.
+    and the size of this bundle will grow correspondingly.
+
+-   `TinyTeX-2` contains the `scheme-full` scheme of TeX Live, which means all
+    LaTeX packages that you could possibly install from CTAN. This is the
+    largest bundle, and only available in the [daily
+    release](https://github.com/rstudio/tinytex-releases/releases/daily).
 
 The `zip` packages are for Windows. The `tgz` packages are for macOS. The
 `tar.gz` packages are for Linux. If you prefer using the daily build instead of
 monthly releases, you may also download them from URLs of the form
-`https://yihui.org/tinytex/VARIATION.EXT`, where `VARIATION` can be `TinyTeX-0`,
+`https://yihui.org/tinytex/BUNDLE.EXT`, where `BUNDLE` can be `TinyTeX-0`,
 `TinyTeX-1`, or `TinyTeX`, and `EXT` can be `zip`, `tgz`, or `tar.gz`, e.g.,
 <https://yihui.org/tinytex/TinyTeX.zip>.
 
-|                               | Windows                                                          | macOS                                                             | Linux                                                                   |
-|-------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------|
-| TinyTeX-0                     | [TinyTeX-0.zip](https://yihui.org/tinytex/TinyTeX-0.zip) (27 MB) | [TinyTeX-0.tgz](https://yihui.org/tinytex/TinyTeX-0.tgz) (1.4 MB) | [TinyTeX-0.tar.gz](https://yihui.org/tinytex/TinyTeX-0.tar.gz) (670 KB) |
-| TinyTeX-1                     | [TinyTeX-1.zip](https://yihui.org/tinytex/TinyTeX-1.zip) (99 MB) | [TinyTeX-1.tgz](https://yihui.org/tinytex/TinyTeX-1.tgz) (83 MB)  | [TinyTeX-1.tar.gz](https://yihui.org/tinytex/TinyTeX-1.tar.gz) (64 MB)  |
-| TinyTeX                       | [TinyTeX.zip](https://yihui.org/tinytex/TinyTeX.zip) (200+ MB)   | [TinyTeX.tgz](https://yihui.org/tinytex/TinyTeX.tgz) (188+ MB)    | [TinyTeX.tar.gz](https://yihui.org/tinytex/TinyTeX.tar.gz) (160+ MB)    |
-| tinitex binary (experimental) | [tinitex.zip](https://yihui.org/tinytex/tinitex.zip) (24 MB)     | [tinitex.tgz](https://yihui.org/tinytex/tinitex.tgz) (28 MB)      | [tinitex.tar.gz](https://yihui.org/tinytex/tinitex.tar.gz) (31 MB)      |
+| bundle                        | Windows                                                           | macOS                                                             | Linux                                                                   |
+|-------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------|
+| TinyTeX-0                     | [TinyTeX-0.zip](https://yihui.org/tinytex/TinyTeX-0.zip) (27 MB)  | [TinyTeX-0.tgz](https://yihui.org/tinytex/TinyTeX-0.tgz) (1.1 MB) | [TinyTeX-0.tar.gz](https://yihui.org/tinytex/TinyTeX-0.tar.gz) (800 KB) |
+| TinyTeX-1                     | [TinyTeX-1.zip](https://yihui.org/tinytex/TinyTeX-1.zip) (99 MB)  | [TinyTeX-1.tgz](https://yihui.org/tinytex/TinyTeX-1.tgz) (84 MB)  | [TinyTeX-1.tar.gz](https://yihui.org/tinytex/TinyTeX-1.tar.gz) (66 MB)  |
+| TinyTeX                       | [TinyTeX.zip](https://yihui.org/tinytex/TinyTeX.zip) (225+ MB)    | [TinyTeX.tgz](https://yihui.org/tinytex/TinyTeX.tgz) (217+ MB)    | [TinyTeX.tar.gz](https://yihui.org/tinytex/TinyTeX.tar.gz) (188+ MB)    |
+| TinyTeX-2                     | [TinyTeX-2.zip](https://yihui.org/tinytex/TinyTeX-2.zip) (1.8 GB) | [TinyTeX-2.tgz](https://yihui.org/tinytex/TinyTeX-2.tgz) (1.8 GB) | [TinyTeX-2.tar.gz](https://yihui.org/tinytex/TinyTeX-2.tar.gz) (1.7 GB) |
+| tinitex binary (experimental) | [tinitex.zip](https://yihui.org/tinytex/tinitex.zip) (25 MB)      | [tinitex.tgz](https://yihui.org/tinytex/tinitex.tgz) (30 MB)      | [tinitex.tar.gz](https://yihui.org/tinytex/tinitex.tar.gz) (33 MB)      |
 
 For those who are curious about how these packages are built, please read [the
 FAQ 4 of TinyTeX](https://yihui.org/tinytex/faq/).
@@ -66,15 +73,16 @@ tinytex::install_tinytex(version = "2020.10")
 # use version = "latest" if you want to install the latest release
 ```
 
-Note that `install_tinytex()` installs the variation `TinyTeX-1.*`. If you want
-to install `TinyTeX.*` or `TinyTeX-0.*`, you need to use the function
-`install_prebuilt()`, e.g.,
+Note that `install_tinytex()` installs the bundle `TinyTeX-1` by default. If you
+want to install other bundles, you can use the `bundle` argument, e.g.,
 
 ``` r
-tinytex:::install_prebuilt('TinyTeX')
-# Or tinytex:::install_prebuilt('TinyTeX-0')
+# the `bundle` argument requires a recent version of tinytex
+if (packageVersion('tinytex') <= '0.39') remotes::install_github('rstudio/tinytex')
+
+tinytex::install_tinytex(bundle = 'TinyTeX')
 # You can also specify the version, e.g,
-# tinytex:::install_prebuilt('TinyTeX', version = '2020.10')
+# tinytex::install_tinytex(bundle = 'TinyTeX', version = '2020.10')
 ```
 
 ### Shell/Batch scripts
@@ -83,9 +91,9 @@ Please see <https://yihui.org/tinytex/#installation> for how to install TinyTeX
 via a Unix Shell or Windows Batch script. They also install the latest daily
 build by default, and you may specify the TinyTeX version via an environment
 variable `TINYTEX_VERSION` before running the installation script, e.g.,
-`TINYTEX_VERSION=2020.10`. You may also specify other variations of TinyTeX via
-the environment variable `TINYTEX_INSTALLER`, e.g., `TINYTEX_INSTALLER=TinyTeX`
-(the default is `TinyTeX-1`).
+`TINYTEX_VERSION=2020.10`. You may also specify other bundles of TinyTeX via the
+environment variable `TINYTEX_INSTALLER`, e.g., `TINYTEX_INSTALLER=TinyTeX` (the
+default is `TinyTeX-1`).
 
 ### Chocolatey
 
