@@ -12,8 +12,8 @@ on:
         type: boolean
         default: false
   # Monthly release
-    schedule:
-      - cron: '23 7 1 * *'
+  schedule:
+    - cron: '23 7 1 * *'
 
 
 name: Publish Monthly Release
