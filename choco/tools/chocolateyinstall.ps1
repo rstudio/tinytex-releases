@@ -19,11 +19,11 @@ Write-Host "Running tlmgr path add"
 $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path add`""
 Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
 
-# checks if choco switch var is in parameters
-if ($pp['SystemVar'] -eq 'true') {
-	Write-Host "Running tlmgr SystemVar path add"
+# checks if choco switch AddToSystemPath var is in parameters
+if ($pp['AddToSystemPath'] -eq 'true') {
+	Write-Host "Running tlmgr AddToSystemPath"
 	# Adds to SystemVar Path
-	[Environment]::SetEnvironmentVariable("PATH", $Env:PATH + ";C:\Program Files\Scripts", [EnvironmentVariableTarget]::Machine)
+	[Environment]::SetEnvironmentVariable("PATH", $Env:PATH + ";$toolsDir\TinyTeX\bin\win32", [EnvironmentVariableTarget]::Machine)
 }
 
 Write-Host "Updating tlmgr"
