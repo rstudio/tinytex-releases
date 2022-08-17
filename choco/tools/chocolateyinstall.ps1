@@ -9,14 +9,22 @@ $packageArgs = @{
   checksumType  = 'md5'
 }
 
-Install-ChocolateyZipPackage @packageArgs
+# get Package Parameters
+$pp = Get-PackageParameters
 
+Install-ChocolateyZipPackage @packageArgs
 
 Write-Host "Running tlmgr path add"
 # Adds to Path
 $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path add`""
 Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
 
+# checks if choco switch var is in parameters
+if ($pp['SystemVar'] -eq 'true') {
+	Write-Host "Running tlmgr SystemVar path add"
+	# Adds to SystemVar Path
+	[Environment]::SetEnvironmentVariable("PATH", $Env:PATH + ";C:\Program Files\Scripts", [EnvironmentVariableTarget]::Machine)
+}
 
 Write-Host "Updating tlmgr"
 #updates tlmgr
