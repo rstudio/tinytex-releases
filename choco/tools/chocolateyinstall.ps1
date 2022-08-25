@@ -16,16 +16,15 @@ Install-ChocolateyZipPackage @packageArgs
 
 Write-Host "Running tlmgr path add"
 # Adds to Path
-$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path add`""
-Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
-
-# checks if choco switch AddToSystemPath var is in parameters
 if ($pp['AddToSystemPath'] -eq 'true') {
-   Write-Host "Running tlmgr AddToSystemPath"
-   # AddToSystemPath
-   $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path --w32mode=admin add`""
-   Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
+	Write-Host "Running tlmgr AddToSystemPath"
+	# AddToSystemPath
+	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path --w32mode=admin add`""
+}Else{
+	# AddToUserPath
+	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\win32\tlmgr.bat path add`""
 }
+Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
 
 Write-Host "Updating tlmgr"
 #updates tlmgr
