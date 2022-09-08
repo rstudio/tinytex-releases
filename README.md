@@ -108,7 +108,7 @@ choco install tinytex
 ```
 
 This will install TinyTeX and make the TeX Live package manager, `tlmgr`
-available on User PATH.
+available on user PATH.
 
 ``` powershell
 choco install tinytex -params "/AddToSystemPath"
