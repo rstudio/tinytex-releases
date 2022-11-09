@@ -122,6 +122,8 @@ To uninstall TinyTeX, use the command:
 choco uninstall tinytex
 ```
 
+The Chocolatey package installs `TinyTeX-1` (see [above](#releases)).
+
 ### Scoop
 
 Scoop is another package manager for Windows. You need to install
