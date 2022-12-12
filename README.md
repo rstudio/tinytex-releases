@@ -10,7 +10,7 @@ distribution based on TeX Live. You may see the Github repo
 (<https://github.com/rstudio/tinytex>) and project homepage
 (<https://yihui.org/tinytex/>) for more info.
 
-## Releases
+## Releases {#releases}
 
 The pre-built binary packages of TinyTeX are published (usually monthly but also
 daily) to the Github Releases of this repository:
@@ -113,6 +113,7 @@ available on user PATH.
 ``` powershell
 choco install tinytex -params "/AddToSystemPath"
 ```
+
 This will install TinyTeX and make the TeX Live package manager, `tlmgr`
 available on System PATH.
 
