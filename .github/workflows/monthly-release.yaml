@@ -68,6 +68,8 @@ jobs:
           gh release download daily
           rm -f regex.tar.gz
           rm -f TinyTeX-2*  # do not release the full TeX Live bundle
+          # calculate md5sum of TinyTeX-1.zip for chocolatey
+          echo "TINYTEX_MD5SUM=$(md5sum TinyTeX-1.zip | cut -d' ' -f1)" >> $GITHUB_ENV
           # rename files adding version
           for f in TinyTeX*; do mv $f $(echo "$f" | sed "s/^TinyTeX[^.]*/&-${TINYTEX_RELEASE}/"); done
           mv installer-unix.tar.gz install-unix-${TINYTEX_RELEASE}.tar.gz
@@ -75,7 +77,7 @@ jobs:
       - name: Update chocolatey package info
         run: |
           sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
-          sed -i -E "s|(\s*checksum\s*=\s*')([^']*)('\\s*)|\1$(md5sum TinyTeX-1-v${CURRENT_TAG}.zip | cut -d' ' -f1)\3|" choco/tools/chocolateyinstall.ps1
+          sed -i -E "s|(\s*checksum\s*=\s*')([^']*)('\\s*)|\1${TINYTEX_MD5SUM}\3|" choco/tools/chocolateyinstall.ps1
           git add -u
           git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
 
