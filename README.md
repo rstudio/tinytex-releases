@@ -10,7 +10,7 @@ distribution based on TeX Live. You may see the Github repo
 (<https://github.com/rstudio/tinytex>) and project homepage
 (<https://yihui.org/tinytex/>) for more info.
 
-## Releases {#releases}
+## Releases
 
 The pre-built binary packages of TinyTeX are published (usually monthly but also
 daily) to the Github Releases of this repository:
