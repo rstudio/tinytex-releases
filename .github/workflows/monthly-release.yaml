@@ -89,7 +89,7 @@ jobs:
 
       - name: Create new Github release
         run: |
-          gh release create $TINYTEX_RELEASE -F notes.md -t "TinyTeX $TINYTEX_RELEASE" ${{ runner.temp }}/tinytex-bundles/*
+          gh release create $TINYTEX_RELEASE -F monthly-notes.md -t "TinyTeX $TINYTEX_RELEASE" ${{ runner.temp }}/tinytex-bundles/*
 
   deploy-choco:
     needs: [build-linux]
