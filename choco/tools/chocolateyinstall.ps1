@@ -24,12 +24,12 @@ if ($pp['AddToSystemPath'] -eq 'true') {
 	# AddToUserPath
 	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat path add`""
 }
-Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
+Start-ChocolateyProcessAsAdmin $statementsToRun "$env:WINDIR\system32\cmd.exe"
 
 Write-Host "Updating tlmgr"
 #updates tlmgr
 $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat update --self`""
-Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
+Start-ChocolateyProcessAsAdmin $statementsToRun "$env:WINDIR\system32\cmd.exe"
 
 
 $files = get-childitem $toolsDir -include *.exe -recurse

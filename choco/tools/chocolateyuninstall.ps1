@@ -6,4 +6,4 @@ If ([Environment]::GetEnvironmentVariables("User").Path -split ";" | ?{$_ -like 
     $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat path --w32mode=admin remove`""
 }
 
-Start-ChocolateyProcessAsAdmin $statementsToRun "cmd.exe"
+Start-ChocolateyProcessAsAdmin $statementsToRun "$env:WINDIR\system32\cmd.exe"
