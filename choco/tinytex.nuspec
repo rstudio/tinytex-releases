@@ -3,7 +3,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>tinytex</id>
-    <version>2023.04</version>
+    <version>2023.05</version>
     <packageSourceUrl>https://github.com/rstudio/tinytex-releases/tree/master/choco</packageSourceUrl>
     <owners>naveen521kk</owners>
     <title>TinyTeX</title>
