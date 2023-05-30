@@ -42,8 +42,8 @@ The `zip` packages are for Windows. The `tgz` packages are for macOS. The
 monthly releases, you may also download them from URLs of the form
 `https://yihui.org/tinytex/BUNDLE.EXT`, where `BUNDLE` can be `TinyTeX-0`,
 `TinyTeX-1`, or `TinyTeX`, and `EXT` can be `zip`, `tgz`, or `tar.gz`, e.g.,
-<https://yihui.org/tinytex/TinyTeX.zip>. 
-There is a special case for `TinyTeX-2` on Windows which is available as `exe` only (self extracting archive).
+<https://yihui.org/tinytex/TinyTeX.zip>. There is a special case for `TinyTeX-2`
+on Windows, which is available as `exe` only (self extracting archive).
 
 | bundle                        | Windows                                                           | macOS                                                             | Linux                                                                   |
 |-------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------|
@@ -78,9 +78,6 @@ Note that `install_tinytex()` installs the bundle `TinyTeX-1` by default. If you
 want to install other bundles, you can use the `bundle` argument, e.g.,
 
 ``` r
-# the `bundle` argument requires a recent version of tinytex
-if (packageVersion('tinytex') <= '0.39') remotes::install_github('rstudio/tinytex')
-
 tinytex::install_tinytex(bundle = 'TinyTeX')
 # You can also specify the version, e.g,
 # tinytex::install_tinytex(bundle = 'TinyTeX', version = '2020.10')
