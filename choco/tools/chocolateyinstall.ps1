@@ -1,6 +1,7 @@
 $ErrorActionPreference = 'Stop';
+$version = '2023.07';
 $toolsDir = Get-ToolsLocation
-$url        = "https://github.com/rstudio/tinytex-releases/releases/download/v$($env:ChocolateyPackageVersion)/TinyTeX-1-v$($env:ChocolateyPackageVersion).zip"
+$url        = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-v$($version).zip"
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir

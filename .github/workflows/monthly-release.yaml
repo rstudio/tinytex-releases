@@ -78,6 +78,7 @@ jobs:
         run: |
           sed -i -E "s|(\s*<version>)([0-9.]+)(</version>\s*)|\1${CURRENT_TAG}\3|" choco/tinytex.nuspec
           sed -i -E "s|(\s*checksum\s*=\s*')([^']*)('\\s*)|\1${TINYTEX_MD5SUM}\3|" choco/tools/chocolateyinstall.ps1
+          sed -i -E "s|($version\s*=\s*')([0-9.]+)('\s*)|\1${CURRENT_TAG}\3|" choco/tools/chocolateyinstall.ps1
           git add -u
           git diff-index --quiet HEAD && exit 0 || git commit -m"TinyTeX release v${CURRENT_TAG}"
 
