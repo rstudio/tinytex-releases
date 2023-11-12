@@ -21,7 +21,8 @@ if ($pp['AddToSystemPath'] -eq 'true') {
 	Write-Host "Running tlmgr AddToSystemPath"
 	# AddToSystemPath
 	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat path --w32mode=admin add`""
-}Else{
+}
+else {
 	# AddToUserPath
 	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat path add`""
 }
@@ -32,13 +33,11 @@ Write-Host "Updating tlmgr"
 $statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat update --self`""
 Start-ChocolateyProcessAsAdmin $statementsToRun "$env:WINDIR\system32\cmd.exe"
 
-
-$files = get-childitem $toolsDir -include *.exe -recurse
+$files = Get-ChildItem $toolsDir -Include *.exe -Recurse
 foreach ($file in $files) {
   #We are directly adding it to path so no need to generate shims
-  New-Item "$file.ignore" -type file -force | Out-Null
+  New-Item "$file.ignore" -Type file -Force | Out-Null
 }
-
 
 Write-Host "Installing Extra Packages"
 $tinytex_tmp_file = "$toolsDir\tinytex-pkg-installed.txt"
@@ -46,12 +45,11 @@ if (Test-Path "$tinytex_tmp_file") {
     $env:PATH = "$toolsDir\TinyTeX\bin\windows;$env:PATH"
     $tinytex_pkg_installed = (tlmgr info --list --only-installed --data name)
     $tinytex_reinstall = "$env:TMP\installed_old_packages.ps1"
-    ((Get-Content $tinytex_tmp_file) | Where { $tinytex_pkg_installed -NotContains $_}) | % {"Invoke-Expression '$toolsDir\TinyTeX\bin\windows\tlmgr.bat install {0}'" -f $_} > $tinytex_reinstall
+    ((Get-Content $tinytex_tmp_file) | Where-Object { $tinytex_pkg_installed -NotContains $_}) | ForEach-Object {"Invoke-Expression '$toolsDir\TinyTeX\bin\windows\tlmgr.bat install {0}'" -f $_} > $tinytex_reinstall
     if ((Get-Content $tinytex_reinstall) -ne $null){
         Write-Host "Installing previous user installed packages"
         Invoke-Expression "$tinytex_reinstall"
     }
-    Remove-Item -force $tinytex_reinstall
-    Remove-Item -force $tinytex_tmp_file
+    Remove-Item -Force $tinytex_reinstall
+    Remove-Item -Force $tinytex_tmp_file
 }
-
