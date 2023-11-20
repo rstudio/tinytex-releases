@@ -21,8 +21,7 @@ if ($pp['AddToSystemPath'] -eq 'true') {
 	Write-Host "Running tlmgr AddToSystemPath"
 	# AddToSystemPath
 	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat path --w32mode=admin add`""
-}
-else {
+} else {
 	# AddToUserPath
 	$statementsToRun = "/C `"$toolsDir\TinyTeX\bin\windows\tlmgr.bat path add`""
 }
@@ -36,7 +35,7 @@ Start-ChocolateyProcessAsAdmin $statementsToRun "$env:WINDIR\system32\cmd.exe"
 $files = Get-ChildItem $toolsDir -Include *.exe -Recurse
 foreach ($file in $files) {
   #We are directly adding it to path so no need to generate shims
-  New-Item "$file.ignore" -Type file -Force | Out-Null
+  New-Item "$file.ignore" -ItemType file -Force | Out-Null
 }
 
 Write-Host "Installing Extra Packages"
