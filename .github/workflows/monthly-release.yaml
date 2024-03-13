@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # needed to get the tags
           fetch-depth: 0
