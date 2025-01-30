@@ -72,7 +72,7 @@ jobs:
           echo "TINYTEX_MD5SUM=$(md5sum TinyTeX-1.zip | cut -d' ' -f1)" >> $GITHUB_ENV
           # rename files adding version
           for f in TinyTeX*; do mv $f $(echo "$f" | sed "s/^TinyTeX[^.]*/&-${TINYTEX_RELEASE}/"); done
-          mv installer-unix.tar.gz install-unix-${TINYTEX_RELEASE}.tar.gz
+          mv installer-unix.tar.gz installer-unix-${TINYTEX_RELEASE}.tar.gz
 
       - name: Update chocolatey package info
         run: |
