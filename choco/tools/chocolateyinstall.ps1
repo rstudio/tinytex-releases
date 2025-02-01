@@ -1,12 +1,12 @@
 $ErrorActionPreference = 'Stop';
-$version = '2025.01';
+$version = '2025.02';
 $toolsDir = Get-ToolsLocation
 $url        = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-v$($version).zip"
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
   unzipLocation = $toolsDir
   url           = $url
-  checksum      = 'd884ec4853039b0732d4129781737dd8'
+  checksum      = '568e1cafcc359cc444a197726862d030'
   checksumType  = 'md5'
 }
 
