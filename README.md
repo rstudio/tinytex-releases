@@ -23,12 +23,12 @@ following variations that bundle different numbers of LaTeX packages:
     variation), e.g., `tlmgr install latex-bin framed`.
 
 -   `TinyTeX-1` contains [about 90 LaTeX
-    packages](https://github.com/rstudio/tinytex/blob/master/tools/pkgs-custom.txt)
+    packages](https://github.com/rstudio/tinytex/blob/main/tools/pkgs-custom.txt)
     enough to compile common R Markdown documents (which was the original
     motivation of the TinyTeX project).
 
 -   `TinyTeX` contains [more LaTeX
-    packages](https://github.com/rstudio/tinytex/blob/master/tools/pkgs-yihui.txt)
+    packages](https://github.com/rstudio/tinytex/blob/main/tools/pkgs-yihui.txt)
     requested by the community. The list of packages may grow as time goes by,
     and the size of this bundle will grow correspondingly.
 
