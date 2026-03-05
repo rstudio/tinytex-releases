@@ -38,20 +38,21 @@ following variations that bundle different numbers of LaTeX packages:
     release](https://github.com/rstudio/tinytex-releases/releases/daily).
 
 The `zip` packages are for Windows. The `tgz` packages are for macOS. The
-`tar.gz` packages are for Linux. If you prefer using the daily build instead of
+`tar.gz` packages are for Linux (x86_64). Linux ARM64 (aarch64) bundles are
+also available with an `-arm64` suffix (e.g., `TinyTeX-1-arm64.tar.gz`). If you prefer using the daily build instead of
 monthly releases, you may also download them from URLs of the form
 `https://yihui.org/tinytex/BUNDLE.EXT`, where `BUNDLE` can be `TinyTeX-0`,
 `TinyTeX-1`, or `TinyTeX`, and `EXT` can be `zip`, `tgz`, or `tar.gz`, e.g.,
 <https://yihui.org/tinytex/TinyTeX.zip>. There is a special case for `TinyTeX-2`
 on Windows, which is available as `exe` only (self extracting archive).
 
-| bundle                        | Windows                                                           | macOS                                                             | Linux                                                                   |
-|-------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------|
-| TinyTeX-0                     | [TinyTeX-0.zip](https://yihui.org/tinytex/TinyTeX-0.zip) (27 MB)  | [TinyTeX-0.tgz](https://yihui.org/tinytex/TinyTeX-0.tgz) (1.1 MB) | [TinyTeX-0.tar.gz](https://yihui.org/tinytex/TinyTeX-0.tar.gz) (800 KB) |
-| TinyTeX-1                     | [TinyTeX-1.zip](https://yihui.org/tinytex/TinyTeX-1.zip) (99 MB)  | [TinyTeX-1.tgz](https://yihui.org/tinytex/TinyTeX-1.tgz) (84 MB)  | [TinyTeX-1.tar.gz](https://yihui.org/tinytex/TinyTeX-1.tar.gz) (66 MB)  |
-| TinyTeX                       | [TinyTeX.zip](https://yihui.org/tinytex/TinyTeX.zip) (225+ MB)    | [TinyTeX.tgz](https://yihui.org/tinytex/TinyTeX.tgz) (217+ MB)    | [TinyTeX.tar.gz](https://yihui.org/tinytex/TinyTeX.tar.gz) (188+ MB)    |
-| TinyTeX-2                     | [TinyTeX-2.exe](https://yihui.org/tinytex/TinyTeX-2.exe) (1.4 GB) | [TinyTeX-2.tgz](https://yihui.org/tinytex/TinyTeX-2.tgz) (1.8 GB) | [TinyTeX-2.tar.gz](https://yihui.org/tinytex/TinyTeX-2.tar.gz) (1.7 GB) |
-| tinitex binary (experimental) | [tinitex.zip](https://yihui.org/tinytex/tinitex.zip) (25 MB)      | [tinitex.tgz](https://yihui.org/tinytex/tinitex.tgz) (30 MB)      | [tinitex.tar.gz](https://yihui.org/tinytex/tinitex.tar.gz) (33 MB)      |
+| bundle                        | Windows                                                           | macOS                                                             | Linux                                                                   | Linux ARM64                                                                             |
+|-------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| TinyTeX-0                     | [TinyTeX-0.zip](https://yihui.org/tinytex/TinyTeX-0.zip) (27 MB)  | [TinyTeX-0.tgz](https://yihui.org/tinytex/TinyTeX-0.tgz) (1.1 MB) | [TinyTeX-0.tar.gz](https://yihui.org/tinytex/TinyTeX-0.tar.gz) (800 KB) | [TinyTeX-0-arm64.tar.gz](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-0-arm64.tar.gz) |
+| TinyTeX-1                     | [TinyTeX-1.zip](https://yihui.org/tinytex/TinyTeX-1.zip) (99 MB)  | [TinyTeX-1.tgz](https://yihui.org/tinytex/TinyTeX-1.tgz) (84 MB)  | [TinyTeX-1.tar.gz](https://yihui.org/tinytex/TinyTeX-1.tar.gz) (66 MB)  | [TinyTeX-1-arm64.tar.gz](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-1-arm64.tar.gz) |
+| TinyTeX                       | [TinyTeX.zip](https://yihui.org/tinytex/TinyTeX.zip) (225+ MB)    | [TinyTeX.tgz](https://yihui.org/tinytex/TinyTeX.tgz) (217+ MB)    | [TinyTeX.tar.gz](https://yihui.org/tinytex/TinyTeX.tar.gz) (188+ MB)    | [TinyTeX-arm64.tar.gz](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-arm64.tar.gz)     |
+| TinyTeX-2                     | [TinyTeX-2.exe](https://yihui.org/tinytex/TinyTeX-2.exe) (1.4 GB) | [TinyTeX-2.tgz](https://yihui.org/tinytex/TinyTeX-2.tgz) (1.8 GB) | [TinyTeX-2.tar.gz](https://yihui.org/tinytex/TinyTeX-2.tar.gz) (1.7 GB) | [TinyTeX-2-arm64.tar.gz](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-2-arm64.tar.gz) |
+| tinitex binary (experimental) | [tinitex.zip](https://yihui.org/tinytex/tinitex.zip) (25 MB)      | [tinitex.tgz](https://yihui.org/tinytex/tinitex.tgz) (30 MB)      | [tinitex.tar.gz](https://yihui.org/tinytex/tinitex.tar.gz) (33 MB)      |                                                                                          |
 
 For those who are curious about how these packages are built, please read [the
 FAQ 4 of TinyTeX](https://yihui.org/tinytex/faq/).
