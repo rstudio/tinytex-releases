@@ -1,3 +1,1 @@
 `TinyTeX-0` contains the `infraonly` scheme of TeX Live, without any LaTeX packages. `TinyTeX-1` contains enough LaTeX packages to compile R Markdown documents. `TinyTeX` contains even more LaTeX packages installed per request from the community. `TinyTeX-2` contains the full TeX Live packages (created via `tlmgr install scheme-full`, and only exists in the [daily release](https://github.com/rstudio/tinytex-releases/releases/tag/daily) but not the monthly releases).
-
-The `zip` packages are for Windows. The `tgz` packages are for macOS. The `tar.gz` packages are for Linux (x86_64), and `-arm64.tar.gz` packages are for Linux ARM64. Please see <https://github.com/rstudio/tinytex-releases> for more info.
