@@ -1,0 +1,118 @@
+on:
+  # Triggered when the daily prerelease is published/updated
+  release:
+    types: [prereleased]
+  # Can also be triggered manually
+  workflow_dispatch:
+
+name: Update README size table
+
+jobs:
+  update-size-table:
+    runs-on: ubuntu-latest
+    # Only run for the daily tag (or manual triggers)
+    if: github.event_name == 'workflow_dispatch' || github.event.release.tag_name == 'daily'
+
+    permissions:
+      contents: write
+
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Generate size table and update README
+        run: |
+          python3 << 'EOF'
+          import subprocess, json, re, os
+
+          # Fetch assets from the daily release
+          result = subprocess.run(
+              ['gh', 'api', f"repos/{os.environ['GH_REPO']}/releases/tags/daily"],
+              capture_output=True, text=True, check=True,
+          )
+          assets = json.loads(result.stdout)['assets']
+
+          # Regex to parse: {bundle}-{platform}.tar.xz or {bundle}-{platform}.exe
+          BUNDLE_RE = re.compile(r'^(TinyTeX(?:-\d+)?)-(.+?)\.(tar\.xz|exe)$')
+
+          # Preferred display labels; unknown platforms fall back to their raw name
+          PLATFORM_LABELS = {
+              'windows':           'Windows',
+              'darwin':            'macOS',
+              'linux-x86_64':      'Linux (x86_64)',
+              'linux-arm64':       'Linux (arm64)',
+              'linuxmusl-x86_64':  'Linux (musl, x86_64)',
+          }
+
+          BUNDLE_ORDER   = ['TinyTeX-0', 'TinyTeX-1', 'TinyTeX', 'TinyTeX-2']
+          PLATFORM_ORDER = list(PLATFORM_LABELS)
+
+          # Build {bundle: {platform: (size, url)}}
+          table = {}
+          for a in assets:
+              m = BUNDLE_RE.match(a['name'])
+              if not m:
+                  continue
+              bundle, platform = m.group(1), m.group(2)
+              table.setdefault(bundle, {})[platform] = (a['size'], a['browser_download_url'])
+
+          # Ordered bundles and platforms; new ones are appended automatically
+          all_bundles   = set(table)
+          all_platforms = {p for b in table.values() for p in b}
+          bundles   = [b for b in BUNDLE_ORDER   if b in all_bundles]   + sorted(all_bundles   - set(BUNDLE_ORDER))
+          platforms = [p for p in PLATFORM_ORDER if p in all_platforms] + sorted(all_platforms - set(PLATFORM_ORDER))
+
+          def fmt_size(n):
+              if n >= 1_000_000_000:
+                  return f'{n / 1e9:.1f} GB'
+              if n >= 1_000_000:
+                  return f'{n / 1e6:.0f} MB'
+              return f'{n / 1e3:.0f} KB'
+
+          # Build markdown table (platforms = rows, bundles = columns)
+          header = '| Platform | ' + ' | '.join(bundles) + ' |'
+          sep    = '|---|' + '---|' * len(bundles)
+          rows   = [header, sep]
+          for p in platforms:
+              label = PLATFORM_LABELS.get(p, p)
+              cells = []
+              for b in bundles:
+                  entry = table.get(b, {}).get(p)
+                  cells.append(f'[{fmt_size(entry[0])}]({entry[1]})' if entry else '')
+              rows.append(f'| {label} | ' + ' | '.join(cells) + ' |')
+
+          table_md = '\n'.join(rows)
+
+          # Replace content between the size-table markers in README.md
+          with open('README.md') as f:
+              readme = f.read()
+
+          marker_start = '<!-- size-table -->'
+          marker_end   = '<!-- /size-table -->'
+          if marker_start not in readme or marker_end not in readme:
+              raise RuntimeError(f'README.md is missing {marker_start!r} or {marker_end!r} markers')
+
+          new_readme = re.sub(
+              r'(<!-- size-table -->).*?(<!-- /size-table -->)',
+              f'<!-- size-table -->\n\n{table_md}\n\n<!-- /size-table -->',
+              readme,
+              flags=re.DOTALL,
+          )
+
+          with open('README.md', 'w') as f:
+              f.write(new_readme)
+
+          print(table_md)
+          EOF
+
+      - name: Commit and push
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git diff-index --quiet HEAD || git commit -m "Update file size table in README"
+          git push
