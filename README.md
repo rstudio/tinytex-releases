@@ -50,7 +50,6 @@ bundles on different platforms.
 | Linux (x86_64) | [795 KB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-0-linux-x86_64.tar.xz) | [52 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-1-linux-x86_64.tar.xz) | [150 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-linux-x86_64.tar.xz) | [1.7 GB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-2-linux-x86_64.tar.xz) |
 | Linux (arm64) | [731 KB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-0-linux-arm64.tar.xz) | [50 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-1-linux-arm64.tar.xz) | [153 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-linux-arm64.tar.xz) | [1.7 GB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-2-linux-arm64.tar.xz) |
 | Linux (musl, x86_64) | [1 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-0-linuxmusl-x86_64.tar.xz) | [53 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-1-linuxmusl-x86_64.tar.xz) | [146 MB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-linuxmusl-x86_64.tar.xz) | [1.7 GB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-2-linuxmusl-x86_64.tar.xz) |
-| 2 |  |  | [1.7 GB](https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-2.exe) |  |
 
 <!-- /size-table -->
 
