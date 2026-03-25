@@ -37,7 +37,7 @@ jobs:
           assets = json.loads(result.stdout)['assets']
 
           # Regex to parse: {bundle}-{platform}.tar.xz or {bundle}-{platform}.exe
-          BUNDLE_RE = re.compile(r'^(TinyTeX(?:-\d+)?)-(.+?)\.(tar\.xz|exe)$')
+          BUNDLE_RE = re.compile(r'^(TinyTeX(?:-\d+)?)-([a-zA-Z][^.]*)\.(tar\.xz|exe)$')
 
           # Preferred display labels; unknown platforms fall back to their raw name
           PLATFORM_LABELS = {
