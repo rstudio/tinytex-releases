@@ -68,12 +68,8 @@ jobs:
           gh release download daily
           rm -f regex.tar.gz
           rm -f TinyTeX-2*  # do not release the full TeX Live bundle
-          # calculate md5sum for chocolatey: use .exe for versions > 2026.03.02, .zip otherwise
-          if printf '%s\n' "2026.03.02" "$CURRENT_TAG" | sort -V -C && [ "$CURRENT_TAG" != "2026.03.02" ]; then
-            echo "TINYTEX_MD5SUM=$(md5sum TinyTeX-1-windows.exe | cut -d' ' -f1)" >> $GITHUB_ENV
-          else
-            echo "TINYTEX_MD5SUM=$(md5sum TinyTeX-1.zip | cut -d' ' -f1)" >> $GITHUB_ENV
-          fi
+          # calculate md5sum of TinyTeX-1-windows.exe for chocolatey
+          echo "TINYTEX_MD5SUM=$(md5sum TinyTeX-1-windows.exe | cut -d' ' -f1)" >> $GITHUB_ENV
           # rename files adding version
           for f in TinyTeX*; do mv $f $(echo "$f" | sed "s/^TinyTeX[^.]*/&-${TINYTEX_RELEASE}/"); done
           mv installer-unix.tar.gz installer-unix-${TINYTEX_RELEASE}.tar.gz

@@ -7,28 +7,16 @@ $checksumType  = 'md5'
 # get Package Parameters
 $pp = Get-PackageParameters
 
-if ([version]$version -gt [version]'2026.3.2') {
-  $url = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-windows-v$($version).exe"
-  $packageArgs = @{
-    packageName   = $env:ChocolateyPackageName
-    fileType      = 'exe'
-    silentArgs    = "-o`"$toolsDir`" -y"
-    url           = $url
-    checksum      = $checksum
-    checksumType  = $checksumType
-  }
-  Install-ChocolateyPackage @packageArgs
-} else {
-  $url = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-v$($version).zip"
-  $packageArgs = @{
-    packageName   = $env:ChocolateyPackageName
-    unzipLocation = $toolsDir
-    url           = $url
-    checksum      = $checksum
-    checksumType  = $checksumType
-  }
-  Install-ChocolateyZipPackage @packageArgs
+$url = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-windows-v$($version).exe"
+$packageArgs = @{
+  packageName   = $env:ChocolateyPackageName
+  fileType      = 'exe'
+  silentArgs    = "-o`"$toolsDir`" -y"
+  url           = $url
+  checksum      = $checksum
+  checksumType  = $checksumType
 }
+Install-ChocolateyPackage @packageArgs
 
 Write-Host "Running tlmgr path add"
 # Adds to Path
