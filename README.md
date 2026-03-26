@@ -39,7 +39,7 @@ following variations that bundle different numbers of LaTeX packages:
 
 Binaries are provided as `.xz` archives for macOS/Linux, and `.exe` self
 extracting archives for Windows. Below is a table of file sizes for different
-bundles on different platforms.
+bundles on all currently supported platforms.
 
 <!-- size-table -->
 
