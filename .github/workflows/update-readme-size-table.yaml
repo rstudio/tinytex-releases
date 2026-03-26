@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v4
+        with:
+          ref: master
 
       - name: Generate size table and update README
         run: |
