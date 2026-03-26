@@ -1,7 +1,7 @@
 on:
   # Triggered when the daily prerelease is published/updated
   release:
-    types: [prereleased]
+    types: [published]
   # Can also be triggered manually
   workflow_dispatch:
 
@@ -11,7 +11,9 @@ jobs:
   update-size-table:
     runs-on: ubuntu-latest
     # Only run for the daily tag (or manual triggers)
-    if: github.event_name == 'workflow_dispatch' || github.event.release.tag_name == 'daily'
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.release.tag_name == 'daily' && github.event.release.prerelease == true)
 
     permissions:
       contents: write
