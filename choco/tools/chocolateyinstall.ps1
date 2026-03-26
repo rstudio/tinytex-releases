@@ -1,10 +1,11 @@
 $ErrorActionPreference = 'Stop';
 $version = '2026.03.02';
 $toolsDir = Get-ToolsLocation
-$url        = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-v$($version).zip"
+$url = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-windows-v$($version).exe"
 $packageArgs = @{
   packageName   = $env:ChocolateyPackageName
-  unzipLocation = $toolsDir
+  fileType      = 'exe'
+  silentArgs    = "-o`"$toolsDir`" -y"
   url           = $url
   checksum      = 'd051fd4a497d1ef4922f7b9da7acc156'
   checksumType  = 'md5'
@@ -13,7 +14,7 @@ $packageArgs = @{
 # get Package Parameters
 $pp = Get-PackageParameters
 
-Install-ChocolateyZipPackage @packageArgs
+Install-ChocolateyPackage @packageArgs
 
 Write-Host "Running tlmgr path add"
 # Adds to Path
