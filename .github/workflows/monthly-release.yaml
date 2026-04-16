@@ -68,6 +68,7 @@ jobs:
           gh release download daily
           rm -f regex.tar.gz
           rm -f TinyTeX-2*  # do not release the full TeX Live bundle
+          rm -f TinyTeX-1.tar.gz  # for daily release only (rstudio/tinytex#497)
           # calculate md5sum of TinyTeX-1-windows.exe for chocolatey
           echo "TINYTEX_MD5SUM=$(md5sum TinyTeX-1-windows.exe | cut -d' ' -f1)" >> $GITHUB_ENV
           # rename files adding version
