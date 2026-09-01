@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop';
-$version = '2026.08';
+$version = '2026.09';
 $toolsDir = Get-ToolsLocation
 $url = "https://github.com/rstudio/tinytex-releases/releases/download/v$($version)/TinyTeX-1-windows-v$($version).exe"
 $packageArgs = @{
@@ -7,7 +7,7 @@ $packageArgs = @{
   fileType      = 'exe'
   silentArgs    = "-o`"$toolsDir`" -y"
   url           = $url
-  checksum      = 'a0919754e984f131af2eeb7fa1fafdb8'
+  checksum      = 'ecfbcfbe415446afa9238824099dda41'
   checksumType  = 'md5'
 }
 
